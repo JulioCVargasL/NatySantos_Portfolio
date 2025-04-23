@@ -4,11 +4,92 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Nathy Santos | Fotografía</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+  <script src="https://unpkg.com/flowbite@1.6.5/dist/flowbite.js"></script>
+
 </head>
 
-<body>
-  <h1>El Proyectazo</h1>
+<body class="bg-white text-gray-800 font-sans">
+
+  <!-- Header / Barra de Navegacion -->
+  <header class="bg-white shadow-md sticky top-0 z-50">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+      <h1 class="text-2xl font-bold tracking-wide">Nathy Santos</h1>
+      <nav class="space-x-7 text-sm font-medium">
+        <a href="#" class="hover:text-pink-500">HOME</a>
+        <a href="#portafolio" class="hover:text-pink-500">PORTAFOLIO</a>
+        <a href="#calendario" class="hover:text-pink-500">CALENDARIO</a>
+        <a href="#contacto" class="hover:text-pink-500">CONTACTO</a>
+        <a href="#quien-soy" class="hover:text-pink-500">¿QUIÉN SOY?</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="bg-gray-100 text-center py-20 px-4">
+    <h2 class="text-4xl md:text-5xl font-bold mb-4">FOTOGRAFÍA QUE CUENTA HISTORIAS</h2>
+    <p class="text-lg text-gray-600 mb-8">Capturando emociones, luz y esencia en cada instante</p>
+    <a href="#calendario"
+      class="inline-block bg-pink-500 hover:bg-pink-600 text-white px-8 py-3 rounded-full text-lg transition">RESERVA TU
+      DÍA</a>
+  </section>
+
+  <!-- Portafolio acceso rapido a los portafolios -->
+  <section id="portafolio" class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <h3 class="text-3xl font-semibold text-center mb-10">PORTAFOLIO</h3>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+        <div class="bg-gray-50 rounded-lg shadow p-6 text-center">
+          <h4 class="text-xl font-bold mb-2">CIVILES</h4>
+          <a href="#" class="text-pink-500 hover:underline">VER MÁS</a>
+        </div>
+        <div class="bg-gray-50 rounded-lg shadow p-6 text-center">
+          <h4 class="text-xl font-bold mb-2">BODAS</h4>
+          <a href="#" class="text-pink-500 hover:underline">VER MÁS</a>
+        </div>
+        <div class="bg-gray-50 rounded-lg shadow p-6 text-center">
+          <h4 class="text-xl font-bold mb-2">15 AÑOS</h4>
+          <a href="#" class="text-pink-500 hover:underline">VER MÁS</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Footer -->
+  <footer class="bg-gray-100 text-gray-700 py-12 mt-10">
+    <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+      <div class="flex justify-center md:justify-start">
+        <img src="/static/img/nathy-footer.png" alt="Nathy Santos" class="w-40 h-auto">
+      </div>
+
+      <div class="text-center md:text-left space-y-4">
+        <h4 class="font-semibold text-lg">Navegar</h4>
+        <ul class="space-y-2 text-sm">
+          <li><a href="#" class="hover:text-pink-500">Home</a></li>
+          <li><a href="#quien-soy" class="hover:text-pink-500">Nathy Santos</a></li>
+          <li><a href="#portafolio" class="hover:text-pink-500">Portafolio</a></li>
+          <li><a href="#calendario" class="hover:text-pink-500">Reservas</a></li>
+        </ul>
+      </div>
+
+      <div class="text-center md:text-left space-y-4">
+        <h4 class="font-semibold text-lg">Social</h4>
+        <ul class="space-y-2 text-sm">
+          <li><a href="https://instagram.com/nathysantosfotosdebodas" target="_blank"
+              class="hover:text-pink-500">Instagram</a></li>
+          <li><a href="https://wa.me/1234567890" target="_blank" class="hover:text-pink-500">WhatsApp</a></li>
+        </ul>
+        <h4 class="font-semibold text-lg mt-6">Contacto</h4>
+        <a href="#contacto" class="text-sm hover:text-pink-500">Envía un mensaje</a>
+      </div>
+    </div>
+
+    <div class="border-t mt-12 pt-4 text-center text-sm text-gray-500">
+      <p class="mb-2">Fotografía que cuenta historias</p>
+      <p class="text-xs">&copy; 2025 Nathy Santos. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
 </body>
 
 </html>
