@@ -4,83 +4,149 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nathy Santos | Fotografía</title>
+  <title>Nathy Santos | Fotos de bodas</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+  <link rel="stylesheet" href="/static/css/custom.css">
   <script src="https://unpkg.com/flowbite@1.6.5/dist/flowbite.js"></script>
 
 </head>
 
-<body class="bg-white text-gray-800 font-sans">
+<body class=" text-gray-800 font-sans" style="background-color: #F2F2F2; color: #A68B6A;">
 
   <!-- Header / Barra de Navegacion -->
+
   <header class="bg-white shadow-md sticky top-0 z-50">
     <div class="container mx-auto px-4 py-4 flex justify-between items-center">
       <h1 class="text-2xl font-bold tracking-wide">Nathy Santos</h1>
       <nav class="space-x-7 text-sm font-medium">
-        <a href="#" class="hover:text-pink-500">HOME</a>
-        <a href="#portafolio" class="hover:text-pink-500">PORTAFOLIO</a>
-        <a href="#calendario" class="hover:text-pink-500">CALENDARIO</a>
-        <a href="#contacto" class="hover:text-pink-500">CONTACTO</a>
-        <a href="#quien-soy" class="hover:text-pink-500">¿QUIÉN SOY?</a>
+        <a href="#" class="resaltar">HOME</a>
+        <a href="#portafolio" class="resaltar">PORTAFOLIO</a>
+        <a href="#calendario" class="resaltar">CALENDARIO</a>
+        <a href="#contacto" class="resaltar">CONTACTO</a>
+        <a href="#quien-soy" class="resaltar">¿QUIÉN SOY?</a>
       </nav>
     </div>
   </header>
 
-  <!-- Hero Section -->
-  <section class="bg-gray-100 text-center py-20 px-4">
-    <h2 class="text-4xl md:text-5xl font-bold mb-4">FOTOGRAFÍA QUE CUENTA HISTORIAS</h2>
-    <p class="text-lg text-gray-600 mb-8">Capturando emociones, luz y esencia en cada instante</p>
-    <a href="#calendario"
-      class="inline-block bg-pink-500 hover:bg-pink-600 text-white px-8 py-3 rounded-full text-lg transition">RESERVA TU
-      DÍA</a>
+  <!-- Foto de protada -->
+
+  <section class="mt-4">
+    <div class="w-full overflow-hidden h-96 md:h-">
+      <img src="/static/img/IMG_ref/webp_fomat/portada.webp" alt="Boda en la playa"
+        class="w-full h-full object-cover object-center rounded-none shadow-md">
+    </div>
   </section>
 
-  <!-- Portafolio acceso rapido a los portafolios -->
+  <!-- Acceso rapido a los portafolios -->
+
   <section id="portafolio" class="py-16 bg-white">
     <div class="container mx-auto px-4">
       <h3 class="text-3xl font-semibold text-center mb-10">PORTAFOLIO</h3>
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-        <div class="bg-gray-50 rounded-lg shadow p-6 text-center">
-          <h4 class="text-xl font-bold mb-2">CIVILES</h4>
-          <a href="#" class="text-pink-500 hover:underline">VER MÁS</a>
+
+        <!-- Portafolios principales -->
+
+        <!--CIVILES-->
+
+        <div class="text-center">
+          <h4 class="text-2xl font-bold mb-4">CIVILES</h3>
+            <div class="group relative w-full h-[320px] overflow-hidden rounded-md shadow-md mb-4">
+              <img src="/static/img/IMG_ref/webp_fomat/CIVIL_accesoR.webp" alt="Sesión bodas"
+                class="w-full h-full object-cover object-center transition duration-300 ease-in-out group-hover:opacity-60">
+              <div
+                class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out">
+                <a href="#portafolio"
+                  class="text-white text-xl font-semibold bg-black bg-opacity-60 px-6 py-2 rounded-full transition duration-300 ease-in-out resaltar_VerMas">
+                  VER MÁS
+                </a>
+              </div>
+            </div>
         </div>
-        <div class="bg-gray-50 rounded-lg shadow p-6 text-center">
-          <h4 class="text-xl font-bold mb-2">BODAS</h4>
-          <a href="#" class="text-pink-500 hover:underline">VER MÁS</a>
+
+        <!--BODAS-->
+
+        <div class="text-center">
+          <h4 class="text-2xl font-bold mb-4">BODAS</h3>
+            <div class="group relative w-full h-[320px] overflow-hidden rounded-md shadow-md mb-4">
+              <img src="/static/img/IMG_ref/webp_fomat/BODAS_accesoR.webp" alt="Sesión bodas"
+                class="w-full h-full object-cover object-center transition duration-300 ease-in-out group-hover:opacity-60">
+              <div
+                class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out">
+                <a href="#portafolio"
+                  class="text-white text-xl font-semibold bg-black bg-opacity-60 px-6 py-2 rounded-full transition duration-300 ease-in-out resaltar_VerMas">
+                  VER MÁS
+                </a>
+              </div>
+            </div>
         </div>
-        <div class="bg-gray-50 rounded-lg shadow p-6 text-center">
-          <h4 class="text-xl font-bold mb-2">15 AÑOS</h4>
-          <a href="#" class="text-pink-500 hover:underline">VER MÁS</a>
+
+        <!--15 AÑOS-->
+
+        <div class="text-center">
+          <h4 class="text-2xl font-bold mb-4">15 AÑOS</h3>
+            <div class="group relative w-full h-[320px] overflow-hidden rounded-md shadow-md mb-4">
+              <img src="/static/img/IMG_ref/webp_fomat/15AÑOS_accesoR.webp" alt="Sesión bodas"
+                class="w-full h-full object-cover object-center transition duration-300 ease-in-out group-hover:opacity-60">
+              <div
+                class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out">
+                <a href="#portafolio"
+                  class="text-white text-xl font-semibold bg-black bg-opacity-60 px-6 py-2 rounded-full transition duration-300 ease-in-out resaltar_VerMas">
+                  VER MÁS
+                </a>
+              </div>
+            </div>
         </div>
       </div>
     </div>
   </section>
+
+  <!-- Hero Section -->
+
+  <section class="relative w-full overflow-hidden text-center py-20 px-4 hero">
+
+    <!-- Imagen de fondo-hero -->
+    <img src="/static/img/IMG_ref/webp_fomat/fondo-hero.webp" alt="Fondo Hero"
+      class="absolute inset-0 w-full h-full object-cover opacity-30">
+
+    <!-- Contenido sobre imagen -->
+    <div class="relative z-10">
+      <h2 class="text-4xl md:text-5xl font-bold mb-4 text-white drop-shadow-lg">
+        FOTOGRAFÍA QUE CUENTA HISTORIAS
+      </h2>
+      <a href="#calendario"
+        class="inline-block reserva_link text-white px-8 py-3 rounded-full text-lg transition transform hover:scale-105">
+        RESERVA TU DÍA
+      </a>
+    </div>
+  </section>
+
   <!-- Footer -->
-  <footer class="bg-gray-100 text-gray-700 py-12 mt-10">
+
+  <footer class="bg-grey-100 text-gray-700 py-12 mt-100">
     <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
       <div class="flex justify-center md:justify-start">
-        <img src="/static/img/nathy-footer.png" alt="Nathy Santos" class="w-40 h-auto">
+        <img src="/static/img/IMG_ref/webp_fomat/nathy-footer.webp" alt="Nathy Santos" class="w-60 h-auto">
       </div>
 
       <div class="text-center md:text-left space-y-4">
         <h4 class="font-semibold text-lg">Navegar</h4>
         <ul class="space-y-2 text-sm">
-          <li><a href="#" class="hover:text-pink-500">Home</a></li>
-          <li><a href="#quien-soy" class="hover:text-pink-500">Nathy Santos</a></li>
-          <li><a href="#portafolio" class="hover:text-pink-500">Portafolio</a></li>
-          <li><a href="#calendario" class="hover:text-pink-500">Reservas</a></li>
+          <li><a href="#" class="resaltar">Home</a></li>
+          <li><a href="#quien-soy" class="resaltar">Nathy Santos</a></li>
+          <li><a href="#portafolio" class="resaltar">Portafolio</a></li>
+          <li><a href="#calendario" class="resaltar">Reservas</a></li>
         </ul>
       </div>
 
       <div class="text-center md:text-left space-y-4">
         <h4 class="font-semibold text-lg">Social</h4>
         <ul class="space-y-2 text-sm">
-          <li><a href="https://instagram.com/nathysantosfotosdebodas" target="_blank"
-              class="hover:text-pink-500">Instagram</a></li>
-          <li><a href="https://wa.me/1234567890" target="_blank" class="hover:text-pink-500">WhatsApp</a></li>
+          <li><a href="https://instagram.com/nathysantosfotosdebodas" target="_blank" class="resaltar">Instagram</a>
+          </li>
+          <li><a href="https://wa.me/1234567890" target="_blank" class="resaltar">WhatsApp</a></li>
         </ul>
         <h4 class="font-semibold text-lg mt-6">Contacto</h4>
-        <a href="#contacto" class="text-sm hover:text-pink-500">Envía un mensaje</a>
+        <a href="#contacto" class="text-sm resaltar">Envía un mensaje</a>
       </div>
     </div>
 

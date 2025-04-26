@@ -1,0 +1,34 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.resaltar:hover {
+  color: orange;
+}
+
+.reserva_link {
+  background-color: #D9A648;
+  color: #F2F2F2;
+}
+
+.reserva_link:hover {
+  background-color: orange;
+}
+
+.resaltar_VerMas:hover {
+  background-color: #D9A648;
+  color: #F2F2F2;
+}
+
+.hero {
+  height: 400px;
+  color: #A68B6A;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
