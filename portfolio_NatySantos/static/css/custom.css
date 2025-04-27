@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+
 }
 
 .resaltar:hover {
@@ -31,4 +32,27 @@
   justify-content: center;
   align-items: center;
   text-align: center;
+}
+
+.contacto {
+  background-color: #D9BD9C;
+}
+
+.button {
+   background-color: #ec4899; 
+  color: white;
+  padding: 12px 32px;
+  font-size: 1.125rem; /* 18px */
+  border-radius: 9999px; /* Redondeado */
+  display: block;
+  margin: 0 auto; /* Para centrar */
+  text-align: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: none;
+}
+
+.button:hover {
+  background-color: #db2777; 
+  transform: scale(1.05);
 }
