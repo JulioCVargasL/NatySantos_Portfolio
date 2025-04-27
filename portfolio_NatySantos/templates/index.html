@@ -1,161 +1,98 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'layouts/app.html' %}
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nathy Santos | Fotos de bodas</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
-  <link rel="stylesheet" href="/static/css/custom.css">
-  <script src="https://unpkg.com/flowbite@1.6.5/dist/flowbite.js"></script>
+{% block title %}Nathy Santos{% endblock %}
 
-</head>
+{% block content %}
+<!-- Foto de protada -->
 
-<body class=" text-gray-800 font-sans" style="background-color: #F2F2F2; color: #A68B6A;">
+<section class="mt-4">
+  <div class="w-full overflow-hidden h-96 md:h-">
+    <img src="/static/img/webp_fomat/index/portada.webp" alt="Boda en la playa"
+      class="w-full h-full object-cover object-center rounded-none shadow-md">
+  </div>
+</section>
 
-  <!-- Header / Barra de Navegacion -->
+<!-- Acceso rapido a los portafolios -->
 
-  <header class="bg-white shadow-md sticky top-0 z-50">
-    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-      <h1 class="text-2xl font-bold tracking-wide">Nathy Santos</h1>
-      <nav class="space-x-7 text-sm font-medium">
-        <a href="#" class="resaltar">HOME</a>
-        <a href="#portafolio" class="resaltar">PORTAFOLIO</a>
-        <a href="#calendario" class="resaltar">CALENDARIO</a>
-        <a href="#contacto" class="resaltar">CONTACTO</a>
-        <a href="#quien-soy" class="resaltar">¿QUIÉN SOY?</a>
-      </nav>
-    </div>
-  </header>
+<section id="portafolio" class="py-16 bg-white">
+  <div class="container mx-auto px-1">
+    <h3 class="text-3xl font-semibold text-center mb-10">PORTAFOLIO</h3>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
 
-  <!-- Foto de protada -->
+      <!-- Portafolios principales -->
 
-  <section class="mt-4">
-    <div class="w-full overflow-hidden h-96 md:h-">
-      <img src="/static/img/webp_fomat/index/portada.webp" alt="Boda en la playa"
-        class="w-full h-full object-cover object-center rounded-none shadow-md">
-    </div>
-  </section>
+      <!--CIVILES-->
 
-  <!-- Acceso rapido a los portafolios -->
-
-  <section id="portafolio" class="py-16 bg-white">
-    <div class="container mx-auto px-4">
-      <h3 class="text-3xl font-semibold text-center mb-10">PORTAFOLIO</h3>
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-
-        <!-- Portafolios principales -->
-
-        <!--CIVILES-->
-
-        <div class="text-center">
-          <h4 class="text-2xl font-bold mb-4">CIVILES</h3>
-            <div class="group relative w-full h-[320px] overflow-hidden rounded-md shadow-md mb-4">
-              <img src="/static/img/webp_fomat/index/CIVIL_accesoR.webp" alt="Sesión bodas"
-                class="w-full h-full object-cover object-center transition duration-300 ease-in-out group-hover:opacity-60">
-              <div
-                class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out">
-                <a href="#portafolio"
-                  class="text-white text-xl font-semibold bg-black bg-opacity-60 px-6 py-2 rounded-full transition duration-300 ease-in-out resaltar_VerMas">
-                  VER MÁS
-                </a>
-              </div>
+      <div class="text-center">
+        <h4 class="text-2xl font-bold mb-4">CIVILES</h3>
+          <div class="group relative w-full h-[320px] overflow-hidden rounded-md shadow-md mb-4">
+            <img src="/static/img/webp_fomat/index/CIVIL_accesoR.webp" alt="Sesión bodas"
+              class="w-full h-full object-cover object-center transition duration-300 ease-in-out group-hover:opacity-60">
+            <div
+              class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out">
+              <a href="#portafolio"
+                class="text-white text-xl font-semibold bg-black bg-opacity-60 px-6 py-2 rounded-full transition duration-300 ease-in-out resaltar_VerMas">
+                VER MÁS
+              </a>
             </div>
-        </div>
+          </div>
+      </div>
 
-        <!--BODAS-->
+      <!--BODAS-->
 
-        <div class="text-center">
-          <h4 class="text-2xl font-bold mb-4">BODAS</h3>
-            <div class="group relative w-full h-[320px] overflow-hidden rounded-md shadow-md mb-4">
-              <img src="/static/img/webp_fomat/index/BODAS_accesoR.webp" alt="Sesión bodas"
-                class="w-full h-full object-cover object-center transition duration-300 ease-in-out group-hover:opacity-60">
-              <div
-                class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out">
-                <a href="#portafolio"
-                  class="text-white text-xl font-semibold bg-black bg-opacity-60 px-6 py-2 rounded-full transition duration-300 ease-in-out resaltar_VerMas">
-                  VER MÁS
-                </a>
-              </div>
+      <div class="text-center">
+        <h4 class="text-2xl font-bold mb-4">BODAS</h3>
+          <div class="group relative w-full h-[320px] overflow-hidden rounded-md shadow-md mb-4">
+            <img src="/static/img/webp_fomat/index/BODAS_accesoR.webp" alt="Sesión bodas"
+              class="w-full h-full object-cover object-center transition duration-300 ease-in-out group-hover:opacity-60">
+            <div
+              class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out">
+              <a href="#portafolio"
+                class="text-white text-xl font-semibold bg-black bg-opacity-60 px-6 py-2 rounded-full transition duration-300 ease-in-out resaltar_VerMas">
+                VER MÁS
+              </a>
             </div>
-        </div>
+          </div>
+      </div>
 
-        <!--15 AÑOS-->
+      <!--15 AÑOS-->
 
-        <div class="text-center">
-          <h4 class="text-2xl font-bold mb-4">15 AÑOS</h3>
-            <div class="group relative w-full h-[320px] overflow-hidden rounded-md shadow-md mb-4">
-              <img src="/static/img/webp_fomat/index/15AÑOS_accesoR.webp" alt="Sesión bodas"
-                class="w-full h-full object-cover object-center transition duration-300 ease-in-out group-hover:opacity-60">
-              <div
-                class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out">
-                <a href="#portafolio"
-                  class="text-white text-xl font-semibold bg-black bg-opacity-60 px-6 py-2 rounded-full transition duration-300 ease-in-out resaltar_VerMas">
-                  VER MÁS
-                </a>
-              </div>
+      <div class="text-center">
+        <h4 class="text-2xl font-bold mb-4">15 AÑOS</h3>
+          <div class="group relative w-full h-[320px] overflow-hidden rounded-md shadow-md mb-4">
+            <img src="/static/img/webp_fomat/index/15AÑOS_accesoR.webp" alt="Sesión bodas"
+              class="w-full h-full object-cover object-center transition duration-300 ease-in-out group-hover:opacity-60">
+            <div
+              class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out">
+              <a href="#portafolio"
+                class="text-white text-xl font-semibold bg-black bg-opacity-60 px-6 py-2 rounded-full transition duration-300 ease-in-out resaltar_VerMas">
+                VER MÁS
+              </a>
             </div>
-        </div>
+          </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Hero Section -->
+<!-- Hero Section -->
 
-  <section class="relative w-full overflow-hidden text-center py-20 px-4 hero">
+<section class="relative w-full overflow-hidden text-center py-20 px-4 hero">
 
-    <!-- Imagen de fondo-hero -->
-    <img src="/static/img/webp_fomat/index/fondo-hero.webp" alt="Fondo Hero"
-      class="absolute inset-0 w-full h-full object-cover opacity-30">
+  <!-- Imagen de fondo-hero -->
+  <img src="/static/img/webp_fomat/index/fondo-hero.webp" alt="Fondo Hero"
+    class="absolute inset-0 w-full h-full object-cover opacity-30">
 
-    <!-- Contenido sobre imagen -->
-    <div class="relative z-10">
-      <h2 class="text-4xl md:text-5xl font-bold mb-4 text-white drop-shadow-lg">
-        FOTOGRAFÍA QUE CUENTA HISTORIAS
-      </h2>
-      <a href="#calendario"
-        class="inline-block reserva_link text-white px-8 py-3 rounded-full text-lg transition transform hover:scale-105">
-        RESERVA TU DÍA
-      </a>
-    </div>
-  </section>
+  <!-- Contenido sobre imagen -->
+  <div class="relative z-10 ">
+    <h2 class="text-4xl md:text-5xl font-bold mb-4 text-white drop-shadow-lg">
+      FOTOGRAFÍA QUE CUENTA HISTORIAS
+    </h2>
+    <a href="#calendario"
+      class="inline-block reserva_link text-white px-8 py-3 rounded-full text-lg transition transform hover:scale-105 mt-8">
+      RESERVA TU DÍA
+    </a>
+  </div>
+</section>
 
-  <!-- Footer -->
-
-  <footer class="bg-grey-100 text-gray-700 py-12 mt-100">
-    <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
-      <div class="flex justify-center md:justify-start">
-        <img src="/static/img/webp_fomat/index/nathy-footer.webp" alt="Nathy Santos" class="w-60 h-auto">
-      </div>
-
-      <div class="text-center md:text-left space-y-4">
-        <h4 class="font-semibold text-lg">Navegar</h4>
-        <ul class="space-y-2 text-sm">
-          <li><a href="#" class="resaltar">Home</a></li>
-          <li><a href="#quien-soy" class="resaltar">Nathy Santos</a></li>
-          <li><a href="#portafolio" class="resaltar">Portafolio</a></li>
-          <li><a href="#calendario" class="resaltar">Reservas</a></li>
-        </ul>
-      </div>
-
-      <div class="text-center md:text-left space-y-4">
-        <h4 class="font-semibold text-lg">Social</h4>
-        <ul class="space-y-2 text-sm">
-          <li><a href="https://instagram.com/nathysantosfotosdebodas" target="_blank" class="resaltar">Instagram</a>
-          </li>
-          <li><a href="https://wa.me/1234567890" target="_blank" class="resaltar">WhatsApp</a></li>
-        </ul>
-        <h4 class="font-semibold text-lg mt-6">Contacto</h4>
-        <a href="#contacto" class="text-sm resaltar">Envía un mensaje</a>
-      </div>
-    </div>
-
-    <div class="border-t mt-12 pt-4 text-center text-sm text-gray-500">
-      <p class="mb-2">Fotografía que cuenta historias</p>
-      <p class="text-xs">&copy; 2025 Nathy Santos. Todos los derechos reservados.</p>
-    </div>
-  </footer>
-
-</body>
-
-</html>
+{% endblock %}

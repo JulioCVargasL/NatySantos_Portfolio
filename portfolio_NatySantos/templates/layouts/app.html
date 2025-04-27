@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Nathy Santos{% endblock %}</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+  <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+  <script src="https://unpkg.com/flowbite@1.6.5/dist/flowbite.js"></script>
+
+</head>
+
+<body class=" text-gray-800 font-sans" style="background-color: #F2F2F2; color: #A68B6A;">
+
+    <!-- header -->
+    {% include 'layouts/partials/menu.html' %}
+
+    <!-- Contenido -->
+    {% block content %}
+    {% endblock %}
+
+    <!-- footer -->
+    {% include 'layouts/partials/footer.html' %}
+
+</body>
+</html>
