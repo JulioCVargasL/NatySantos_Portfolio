@@ -1,10 +1,14 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% block title %}Nathy Santos{% endblock %}</title>
+
+  <!--Favicon-->
+  <link rel="icon" href="{% static 'img/logos/favicon2.png' %}" type="image/png">
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
   <link rel="stylesheet" href="{% static 'css/custom.css' %}">
@@ -14,15 +18,16 @@
 
 <body class=" text-gray-800 font-sans" style="background-color: #F2F2F2; color: #A68B6A;">
 
-    <!-- header -->
-    {% include 'layouts/partials/menu.html' %}
+  <!-- header -->
+  {% include 'layouts/partials/menu.html' %}
 
-    <!-- Contenido -->
-    {% block content %}
-    {% endblock %}
+  <!-- Contenido -->
+  {% block content %}
+  {% endblock %}
 
-    <!-- footer -->
-    {% include 'layouts/partials/footer.html' %}
+  <!-- footer -->
+  {% include 'layouts/partials/footer.html' %}
 
 </body>
+
 </html>

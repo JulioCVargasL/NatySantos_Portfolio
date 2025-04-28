@@ -35,11 +35,12 @@
 }
 
 .contacto {
-  background-color: #D9BD9C;
+  background-color: white;
+  color: #A68B6A;
 }
 
 .button {
-   background-color: #ec4899; 
+  background-color: #A68B6A; 
   color: white;
   padding: 12px 32px;
   font-size: 1.125rem; /* 18px */
@@ -53,6 +54,10 @@
 }
 
 .button:hover {
-  background-color: #db2777; 
+  background-color: #D9A648; 
   transform: scale(1.05);
+}
+.formulario {
+  background-color: #F2F2F2;
+  color: #A68B6A;
 }
