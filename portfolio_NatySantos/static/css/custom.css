@@ -69,3 +69,90 @@
   opacity: 0;
   visibility: hidden;
 }
+
+/* Menu portafolio */
+
+/* Contenedor principal */
+.portafolio-section {
+  background-color: #ffffff;
+  padding: 3rem 0; 
+}
+
+.portafolio-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem; 
+}
+
+/* Título principal */
+.portafolio-title {
+  font-size: 2.25rem; 
+  font-weight: 700; 
+  text-align: center;
+  color: #A68B6A; 
+  margin-bottom: 1.5rem; 
+}
+
+/* Grid para las categorías */
+.portafolio-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem; 
+}
+
+@media (min-width: 640px) {
+  .portafolio-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 768px) {
+  .portafolio-grid {
+    grid-template-columns: repeat(3, 1fr); 
+  }
+}
+
+/* Cada bloque de categoría */
+.categoria {
+  text-align: center;
+}
+
+/* Imagenes */
+.categoria-img {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); 
+  margin-bottom: 1.5rem; 
+  width: 100%;
+  height: 27rem; 
+  object-fit: cover;
+}
+
+/* Títulos de categorías */
+.categoria-title {
+  font-size: 1.25rem; 
+  font-weight: 600; 
+  margin-bottom: 1rem; 
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #9b7b5c;
+  width: 100%;
+  display: inline-block;
+}
+
+/* Botón Reservar */
+.boton-reservar {
+  margin-top: 1rem;
+  display: inline-block;
+  background-color: #9b7b5c;
+  color: white;
+  padding: 0.5rem 2rem; 
+  font-size: 0.875rem; 
+  text-transform: uppercase;
+  letter-spacing: 0.05em; 
+  transition: background-color 0.3s ease;
+  text-align: center;
+  width: 100%;
+}
+
+/* Hover del botón */
+.boton-reservar:hover {
+  background-color: #D9A648;
+}
