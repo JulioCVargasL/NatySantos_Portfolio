@@ -1,0 +1,49 @@
+{% extends 'layouts/app.html' %}
+{% load static %}
+
+{% block title %}
+Portafolio | Nathy Santos
+{% endblock %}
+
+{% block content %}
+
+<section class="bg-white py-16">
+  <div class="container mx-auto px-6">
+    
+    <h2 class="text-4xl font-bold text-center text-gray-800 mb-12">Portafolio Fotográfico</h2>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-12">
+
+      <!-- Bodas -->
+      <div class="text-center">
+        <img src="{% static 'img/webp_format/portafolio/bodas.webp' %}" alt="Bodas" class="rounded-lg shadow-lg mb-6 w-full h-80 object-cover">
+        <h3 class="text-xl font-semibold mb-4">Bodas</h3>
+        <a href="#calendario" class="inline-block bg-[#9b7b5c] hover:bg-[#7c604b] text-white py-2 px-6 rounded-full text-sm uppercase tracking-wider transition">
+          Reservar
+        </a>
+      </div>
+
+      <!-- 15 Años -->
+      <div class="text-center">
+        <img src="{% static 'img/webp_format/portafolio/15años.webp' %}" alt="15 años" class="rounded-lg shadow-lg mb-6 w-full h-80 object-cover">
+        <h3 class="text-xl font-semibold mb-4">15 años</h3>
+        <a href="#calendario" class="inline-block bg-[#9b7b5c] hover:bg-[#7c604b] text-white py-2 px-6 rounded-full text-sm uppercase tracking-wider transition">
+          Reservar
+        </a>
+      </div>
+
+      <!-- Eventos por tiempo -->
+      <div class="text-center">
+        <img src="{% static 'img/webp_format/portafolio/eventos.webp' %}" alt="Eventos por tiempo" class="rounded-lg shadow-lg mb-6 w-full h-80 object-cover">
+        <h3 class="text-xl font-semibold mb-4">Eventos por tiempo</h3>
+        <a href="#calendario" class="inline-block bg-[#9b7b5c] hover:bg-[#7c604b] text-white py-2 px-6 rounded-full text-sm uppercase tracking-wider transition">
+          Reservar
+        </a>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+{% endblock %}

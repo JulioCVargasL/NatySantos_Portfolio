@@ -24,7 +24,7 @@
           <i class="fas fa-globe"></i> <span>nathysantos.com</span>
         </div>
         <div class="flex items-center space-x-3">
-          <i class="fab fa-whatsapp"></i> <span>+57 +57 312 390 5110</span>
+          <i class="fab fa-whatsapp"></i> <span> +57 312 390 5110</span>
         </div>
         <div class="flex items-center space-x-3">
           <i class="fab fa-instagram"></i> <span>@nathysantosfotosdebodas</span>
@@ -36,15 +36,15 @@
 
     <div class="formulario p-8 rounded-2xl shadow-md">
       <h3 class="text-2xl font-bold mb-6 text-center">CONTÁCTAME</h3>
-      <form action="#" method="POST" class="space-y-4">
-        <input type="text" placeholder="Tu Nombre"
-          class="w-full p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-100">
-        <input type="email" placeholder="Correo Electrónico"
-          class="w-full p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-300">
-        <input type="text" placeholder="Número de Contacto"
-          class="w-full p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-300">
-        <textarea placeholder="Mensaje" rows="4"
-          class="w-full p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-300"></textarea>
+      <form action="{% url 'contact' %}" method="POST" class="space-y-4">
+        <input type="text" name="nombre" placeholder="Tu Nombre"
+          class="w-full p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400">
+        <input type="email" name="correo" placeholder="Correo Electrónico"
+          class="w-full p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 ring-blue-400">
+        <input type="text" name="telefono" placeholder="Número de Contacto"
+          class="w-full p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 ring-blue-400">
+        <textarea placeholder="Mensaje" name="mensaje" rows="4"
+          class="w-full p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 ring-blue-400"></textarea>
         <button type="submit" class="button">
           Enviar
         </button>

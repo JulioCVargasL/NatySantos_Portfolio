@@ -61,3 +61,11 @@
   background-color: #F2F2F2;
   color: #A68B6A;
 }
+
+#preloader {
+  transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+}
+#preloader.hidden {
+  opacity: 0;
+  visibility: hidden;
+}

@@ -1,19 +1,24 @@
 <!-- Header / Barra de Navegacion -->
 
 <header class="bg-white shadow-md sticky top-0 z-50">
-  <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-    <h1 class="text-2xl font-bold tracking-wide">Nathy Santos</h1>
-    <nav class="space-x-7 text-sm font-medium">
+  <div class="container mx-auto px-6 grid grid-cols-2 items-center">
+    <div class="flex justify-start items-center overflow-hidden h-20">
+      <a href="{% url 'home' %}">
+        <img src="static/img/webp_format/logo/logo_2.webp" alt="Nathy Santos" class="h-28 w-auto">
+      </a>
+    </div>
+
+    <nav class="flex justify-end items-center space-x-6 text-sm font-medium">
       <!--Ir al Index-->
       <a href="{% url 'home' %}" class="resaltar">HOME</a>
       <!--Ir al Portfolio-->
-      <a href="#portafolio" class="resaltar">PORTAFOLIO</a>
+      <a href="{% url 'menuPortfolio' %}" class="resaltar">PORTAFOLIO</a>
       <!--Ir al Calendar-->
       <a href="#Calendario" class="resaltar">CALENDARIO</a>
       <!--Ir al Contact-->
       <a href="{% url 'contact' %}" class="resaltar">CONTACTO</a>
       <!--Ir al NathySantos-->
-      <a href="#quien-soy" class="resaltar">¿QUIÉN SOY?</a>
+      <a href="{% url 'nathySantos' %}" class="resaltar">¿QUIÉN SOY?</a>
     </nav>
   </div>
 </header>

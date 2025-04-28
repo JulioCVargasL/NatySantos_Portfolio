@@ -1,0 +1,42 @@
+{% extends 'layouts/app.html' %}
+{% load static %}
+
+{% block title %}
+¿Quién soy? | Nathy Santos
+{% endblock %}
+
+{% block content %}
+
+<section class="bg-gray-50 py-16">
+  <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+
+    <!-- Imagen de Nathalie -->
+    <div class="flex justify-center">
+      <div class="bg-[#f2d8c2] p-2 rounded-lg">
+        <img src="{% static 'img/webp_format/nathySantos/nathySantos.webp' %}" alt="Nathalie Santos" class="rounded-md shadow-md max-w-sm">
+      </div>
+    </div>
+
+    <!-- Texto de presentación -->
+    <div class="text-center md:text-justify">
+      <h2 class="text-4xl font-bold text-gray-800 mb-4">Hola, soy</h2>
+      <h3 class="text-5xl font-extrabold text-[#9b7b5c] mb-6">Nathalie Santos</h3>
+      <p class="text-gray-600 leading-relaxed mb-8">
+        Creo que cada historia merece ser contada con luz, emoción y autenticidad. 
+        Me apasiona capturar momentos reales, combinando luz natural y artificial para dar vida a cada imagen. 
+        Más que una sesión, para mí es fundamental la conexión con cada pareja, para personalizar cada experiencia 
+        y retratar la esencia de cada instante.
+      </p>
+      <a href="#contacto" class="inline-block bg-[#9b7b5c] hover:bg-[#7c604b] text-white px-8 py-3 rounded-full text-lg transition">
+        Contacto
+      </a>
+      <div class="mt-6 text-gray-600 text-sm">
+        Follow Me! 
+        <a href="https://www.instagram.com/nathysantosfotosdebodas/" target="_blank" class="ml-2 text-[#9b7b5c] hover:underline">@nathysantosfotosdebodas</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+{% endblock %}
