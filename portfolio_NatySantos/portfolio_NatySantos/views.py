@@ -10,6 +10,9 @@ def nathySantos (request):
 def menuPortfolio (request):
   return render(request, 'portfolio/menuPortfolio.html')
 
+def calendar (request):
+  return render(request,'calendar.html')
+
 def contact (request):
   if request.method == 'POST':
     nombre = request.POST.get('nombre')
