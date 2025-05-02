@@ -22,14 +22,14 @@ Portafolios | Nathy Santos
           <img src="{% static 'img/webp_format/menuPortfolio/bodas.webp' %}" alt="Bodas"
             class="w-full h-full object-cover transition duration-300 ease-in-out group-hover:opacity-60 group-hover:scale-105">
           <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out">
-            <a href="#portafolio" class="bg-black bg-opacity-60 resaltar_VerMas text-white text-lg px-6 py-2 rounded-full transition">VER MÁS</a>
+            <a href="{% url 'weddings' %}" class="bg-black bg-opacity-60 resaltar_VerMas text-white text-lg px-6 py-2 rounded-full transition">VER MÁS</a>
           </div>
         </div>
 
         <h3 class="text-2xl font-semibold text-left mb-2 py-2">Bodas</h3>
         <div class="w-20 h-0.5 linea mb-6"></div>
 
-        <a href="#calendario" class="reservar text-white py-3 px-8 text-sm uppercase tracking-wider transition">
+        <a href="{% url 'calendar' %}" class="reservar text-white py-3 px-8 text-sm uppercase tracking-wider transition">
           Reservar
         </a>
       </div>
@@ -47,7 +47,7 @@ Portafolios | Nathy Santos
         <h3 class="text-2xl font-semibold text-left mb-2 py-2">15 Años</h3>
         <div class="w-20 h-0.5 linea mb-6"></div>
 
-        <a href="#calendario" class="reservar text-white py-3 px-8 text-sm uppercase tracking-wider transition">
+        <a href="{% url 'calendar' %}" class="reservar text-white py-3 px-8 text-sm uppercase tracking-wider transition">
           Reservar
         </a>
       </div>
@@ -65,7 +65,7 @@ Portafolios | Nathy Santos
         <h3 class="text-2xl font-semibold text-left mb-2 py-2">Eventos por tiempo</h3>
         <div class="w-20 h-0.5 linea mb-6"></div>
 
-        <a href="#calendario" class="reservar text-white py-3 px-8 text-sm uppercase tracking-wider transition">
+        <a href="{% url 'calendar' %}" class="reservar text-white py-3 px-8 text-sm uppercase tracking-wider transition">
           Reservar
         </a>
       </div>

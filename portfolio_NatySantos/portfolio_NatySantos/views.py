@@ -1,17 +1,30 @@
 from django.shortcuts import render, redirect
 from django.core.mail import send_mail
 
+#Pagina principal
+
 def index (request):
   return render(request, 'index.html')
+
+# ¿Quien soy?
 
 def nathySantos (request):
   return render(request, 'nathySantos.html')
 
+# Portafolios
+
 def menuPortfolio (request):
   return render(request, 'portfolio/menuPortfolio.html')
 
+def weddings (request):
+  return render (request, 'portfolio/weddings.html')
+
+# Calendario
+
 def calendar (request):
   return render(request,'calendar.html')
+
+# Contacto
 
 def contact (request):
   if request.method == 'POST':

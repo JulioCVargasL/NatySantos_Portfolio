@@ -7,5 +7,25 @@ Bodas | Nathy Santos
 
 {% block content %}
 
+<section class="gallery-section group">
+  <img id="mainImage" src="https://via.placeholder.com/1500x900?text=Principal" class="gallery-background" alt="Foto principal">
+  <div class="overlay"></div>
+
+  <h2 class="title">Galería de Bodas</h2>
+
+  <div class="carousel">
+    <img src="https://via.placeholder.com/300x200?text=Foto+1" onclick="changeBackground(this.src)" alt="Thumb 1">
+    <img src="https://via.placeholder.com/300x200?text=Foto+2" onclick="changeBackground(this.src)" alt="Thumb 2">
+    <img src="https://via.placeholder.com/300x200?text=Foto+3" onclick="changeBackground(this.src)" alt="Thumb 3">
+    <img src="https://via.placeholder.com/300x200?text=Foto+4" onclick="changeBackground(this.src)" alt="Thumb 4">
+    <img src="https://via.placeholder.com/300x200?text=Foto+5" onclick="changeBackground(this.src)" alt="Thumb 5">
+  </div>
+</section>
+
+<script>
+  function changeBackground(src) {
+    document.getElementById('mainImage').src = src;
+  }
+</script>
 
 {% endblock %}
