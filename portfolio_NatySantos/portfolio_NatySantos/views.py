@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.core.mail import send_mail
-
+from django.conf import settings
+import os
 #Pagina principal
 
 def index (request):
@@ -17,7 +18,10 @@ def menuPortfolio (request):
   return render(request, 'portfolio/menuPortfolio.html')
 
 def weddings (request):
-  return render (request, 'portfolio/weddings.html')
+  folder_path = os.path.join(settings.BASE_DIR, 'static/img/webp_format/weddings')
+  filenames = [f for f in os.listdir(folder_path) if f.endswith('.webp')]
+  filenames.sort()
+  return render(request, 'portfolio/weddings.html', {'images': filenames})
 
 # Calendario
 
