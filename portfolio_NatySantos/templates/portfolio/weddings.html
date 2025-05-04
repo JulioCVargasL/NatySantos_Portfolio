@@ -9,10 +9,16 @@ Bodas | Nathy Santos
 
 <section class="gallery-section hover-carousel group">
   <!-- Imagen principal -->
-  <img id="mainImage" src="{% static 'img/webp_format/weddings/boda1.webp' %}" class="gallery-background" alt="Foto principal">
+  <img id="mainImage" src="{% static 'img/webp_format/weddings/' %}{{ images.0 }}" class="gallery-background" alt="Foto principal">
+  
   <div class="overlay"></div>
   <div class="hover-zone"></div>
-  
+
+  <!-- Flecha izquierda -->
+  <button class="arrow left" onclick="prevImage()">&#10094;</button>
+  <!-- Flecha derecha -->
+  <button class="arrow right" onclick="nextImage()">&#10095;</button>
+
   <!-- Carrusel horizontal -->
   <div class="carousel flex space-x-4 overflow-x-auto p-4">
      {% for filename in images %}
@@ -27,41 +33,49 @@ Bodas | Nathy Santos
 </section>
 
 <script>
-
-  let currentIndex = 0;
   const imageList = [
     {% for filename in images %}
       "{% static 'img/webp_format/weddings/' %}{{ filename }}",
     {% endfor %}
   ];
 
-  function changeBackground(imageSrc) {
+  let currentIndex = 0;
+
+  function changeBackgroundByIndex(index) {
     const mainImage = document.getElementById("mainImage");
-    mainImage.src = imageSrc;
-    currentIndex = imageList.indexOf(imageSrc);
+    mainImage.src = imageList[index];
+    currentIndex = index;
   }
 
-  // Teclas izquierda/derecha
+  function changeBackground(imageSrc) {
+    const baseURL = window.location.origin;
+    const relativePath = imageSrc.replace(baseURL, '');
+    const index = imageList.indexOf(relativePath);
+    if (index !== -1) {
+      changeBackgroundByIndex(index);
+    }
+  }
+
+  function prevImage() {
+    currentIndex = (currentIndex - 1 + imageList.length) % imageList.length;
+    changeBackgroundByIndex(currentIndex);
+  }
+
+  function nextImage() {
+    currentIndex = (currentIndex + 1) % imageList.length;
+    changeBackgroundByIndex(currentIndex);
+  }
+
+  // Flechas del teclado
   document.addEventListener("keydown", (e) => {
     const carouselVisible = parseFloat(getComputedStyle(document.querySelector('.carousel')).opacity) > 0;
-    if (carouselVisible) return; // No cambia si el carrusel está visible
+    if (carouselVisible) return;
 
-    if (e.key === "ArrowRight") {
-      currentIndex = (currentIndex + 1) % imageList.length;
-      changeBackground(imageList[currentIndex]);
-    } else if (e.key === "ArrowLeft") {
-      currentIndex = (currentIndex - 1 + imageList.length) % imageList.length;
-      changeBackground(imageList[currentIndex]);
-    }
+    if (e.key === "ArrowRight") nextImage();
+    if (e.key === "ArrowLeft") prevImage();
   });
 
-
- function changeBackground(imageSrc) {
-    const relativePath = imageSrc.split("/static/")[1];
-    const mainImage = document.getElementById("mainImage");
-    mainImage.src = "/static/" + relativePath;
-  }
-
+  // Mostrar carrusel al pasar el mouse por hover-zone
   const carousel = document.querySelector('.carousel');
   const hoverZone = document.querySelector('.hover-zone');
 
