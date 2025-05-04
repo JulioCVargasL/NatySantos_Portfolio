@@ -17,11 +17,29 @@ def nathySantos (request):
 def menuPortfolio (request):
   return render(request, 'portfolio/menuPortfolio.html')
 
+# Portafolios / weddings
+
 def weddings (request):
   folder_path = os.path.join(settings.BASE_DIR, 'static/img/webp_format/weddings')
   filenames = [f for f in os.listdir(folder_path) if f.endswith('.webp')]
   filenames.sort()
   return render(request, 'portfolio/weddings.html', {'images': filenames})
+
+# Portafolios / 15 años
+
+def yearsOld_15 (request):
+  folder_path = os.path.join(settings.BASE_DIR, 'static/img/webp_format/15yearsOld')
+  filenames = [f for f in os.listdir(folder_path) if f.endswith('.webp')]
+  filenames.sort()
+  return render(request, 'portfolio/15yearsOld.html', {'images': filenames})
+
+# Portafolios / Eventos por tiempo
+
+def timeEvents (request):
+  folder_path = os.path.join(settings.BASE_DIR, 'static/img/webp_format/timeEvents')
+  filenames = [f for f in os.listdir(folder_path) if f.endswith('.webp')]
+  filenames.sort()
+  return render(request, 'portfolio/timeEvents.html', {'images': filenames})
 
 # Calendario
 

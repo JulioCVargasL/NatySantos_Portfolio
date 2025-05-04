@@ -25,5 +25,7 @@ urlpatterns = [
     path('nathySantos/', nathySantos, name='nathySantos'),
     path('portfolio/menuPortfolio/', menuPortfolio, name='menuPortfolio'),
     path('calendar', calendar, name='calendar'),
-    path('portfolio/weddings.html', weddings, name='weddings')
+    path('portfolio/weddings.html', weddings, name='weddings'),
+    path("portfolio/15yearsOld.html", yearsOld_15, name="15yearsOld"),
+    path('portfolio/timeEvents.html', timeEvents, name='timeEvents')
 ]
