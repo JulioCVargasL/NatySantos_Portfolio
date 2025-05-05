@@ -2,6 +2,10 @@ from django.shortcuts import render, redirect
 from django.core.mail import send_mail
 from django.conf import settings
 import os
+
+from admin_NathySantos.models import PortfolioCategory
+from django.http import Http404
+
 #Pagina principal
 
 def index (request):
@@ -66,3 +70,15 @@ def contact (request):
     )
     return redirect(request, 'contact')
   return render(request, 'contact.html')
+
+def portfolio_dynamic_view(request, category_slug):
+  folder_path = os.path.join(settings.BASE_DIR, 'static', 'img', 'webp_format', category_slug)
+
+  if not os.path.exists(folder_path):
+    raise Http404("Categoria no encontrada")
+
+  filenames = [f for f in os.listdir(folder_path) if f.endswith('.webp')]
+  filenames.sort()
+
+  template_path = f'portfolio/{category_slug}.html'
+  return render(request, template_path, {'images': filenames})

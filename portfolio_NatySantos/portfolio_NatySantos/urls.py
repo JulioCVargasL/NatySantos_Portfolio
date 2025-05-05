@@ -17,6 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from .views import *
+from . import views
+from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,5 +29,7 @@ urlpatterns = [
     path('calendar', calendar, name='calendar'),
     path('portfolio/weddings.html', weddings, name='weddings'),
     path("portfolio/15yearsOld.html", yearsOld_15, name="15yearsOld"),
-    path('portfolio/timeEvents.html', timeEvents, name='timeEvents')
+    path('portfolio/timeEvents.html', timeEvents, name='timeEvents'),
+    path('portfolio/<slug:category_slug>/', views.portfolio_dynamic_view, name= 'dynamic_portfolio'),
+    path('', include('admin_NathySantos.urls')),
 ]

@@ -1,17 +1,24 @@
 from django.db import models
+from django.utils.text import slugify
 
 # Create your models here.
 
 class PortfolioCategory(models.Model):
-  name = models.CharField(max_length=50, unique=True)
-  display_name = models.CharField(max_length=100)
+    name = models.CharField(max_length=50, unique=True)
+    display_name = models.CharField(max_length=100)
+    slug = models.SlugField(unique=True, blank=True)
 
-  class Meta:
-    vervose_name = "Catergoria de Portafolio"
-    vervose_name_plural = "Categorías de Portafolio"
+    class Meta:
+        verbose_name = "Categoría de Portafolio"
+        verbose_name_plural = "Categorías de Portafolio"
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
 
     def __str__(self):
-      return self.display_name
+        return self.display_name
 
 class Portfolio(models.Model):
   title = models.CharField(max_length=100)
