@@ -45,6 +45,31 @@ def timeEvents (request):
   filenames.sort()
   return render(request, 'portfolio/timeEvents.html', {'images': filenames})
 
+# Definir Menu Portafolio
+
+def menuPortfolio(request):
+
+    categorias = PortfolioCategory.objects.all()
+    base_path = os.path.join(settings.BASE_DIR, 'static', 'img', 'webp_format')
+    data = []
+
+    for categoria in categorias:
+        folder_path = os.path.join(base_path, categoria.slug)
+        image = None
+        if os.path.isdir(folder_path):
+            for file in sorted(os.listdir(folder_path)):
+                if file.endswith('.webp'):
+                    image = f'img/webp_format/{categoria.slug}/{file}'
+                    break
+        data.append({
+            'slug': categoria.slug,
+            'name': categoria.name,
+            'display_name': categoria.display_name,
+            'image': image,
+        })
+
+    return render(request, 'portfolio/menuPortfolio.html', {'portfolios': data})
+
 # Calendario
 
 def calendar (request):
@@ -71,6 +96,8 @@ def contact (request):
     return redirect(request, 'contact')
   return render(request, 'contact.html')
 
+# Portafolios dinámicos
+
 def portfolio_dynamic_view(request, category_slug):
   folder_path = os.path.join(settings.BASE_DIR, 'static', 'img', 'webp_format', category_slug)
 
@@ -80,5 +107,13 @@ def portfolio_dynamic_view(request, category_slug):
   filenames = [f for f in os.listdir(folder_path) if f.endswith('.webp')]
   filenames.sort()
 
+  try:
+      category = PortfolioCategory.objects.get(slug=category_slug)
+  except PortfolioCategory.DoesNotExist:
+      raise Http404("Categoría no encontrada")
+
   template_path = f'portfolio/{category_slug}.html'
-  return render(request, template_path, {'images': filenames})
+  return render(request, template_path, {
+    'images': filenames,
+    'category_display_name': category.display_name})
+
