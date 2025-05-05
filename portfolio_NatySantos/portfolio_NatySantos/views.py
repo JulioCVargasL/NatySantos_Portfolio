@@ -115,5 +115,8 @@ def portfolio_dynamic_view(request, category_slug):
   template_path = f'portfolio/{category_slug}.html'
   return render(request, template_path, {
     'images': filenames,
-    'category_display_name': category.display_name})
+    'category_display_name': category.display_name,
+    'category_slug': category.slug
+    })
+    
 

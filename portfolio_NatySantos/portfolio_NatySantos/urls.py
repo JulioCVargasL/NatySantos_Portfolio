@@ -32,4 +32,5 @@ urlpatterns = [
     path('portfolio/timeEvents.html', timeEvents, name='timeEvents'),
     path('portfolio/<slug:category_slug>/', views.portfolio_dynamic_view, name= 'dynamic_portfolio'),
     path('', include('admin_NathySantos.urls')),
+    path('admin-panel/', include('admin_NathySantos.urls'))
 ]

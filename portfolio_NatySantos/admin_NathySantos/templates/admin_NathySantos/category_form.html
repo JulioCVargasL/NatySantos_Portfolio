@@ -1,0 +1,48 @@
+{% extends 'layouts/app.html' %}
+{% load static %}
+
+{% block title %}
+{{ categoria.display_name }} | Nathy Santos
+{% endblock %}
+
+{% block content %}
+
+<section class="py-10 px-6 max-w-4xl mx-auto bg-white shadow-md rounded-lg relative">
+
+  <!-- Botón de regreso -->
+  <a href="{% url 'dashboard' %}" class="absolute top-4 left-4 bg-gray-200 hover:bg-gray-300 text-gray-700 text-sm font-medium py-2 px-4 rounded flex items-center shadow">
+    &#8592; Regresar
+  </a>
+  
+<section class="py-10 px-6 max-w-4xl mx-auto bg-white shadow-md rounded-lg">
+  <h2 class="text-3xl font-bold mb-6 text-center">Editar Portafolio: {{ categoria.display_name }}</h2>
+
+  <!-- Formulario de edición -->
+  <form method="post" class="space-y-6 mb-10">
+    {% csrf_token %}
+    <div>
+      <label for="display_name" class="block text-sm font-semibold mb-1">Nombre a mostrar</label>
+      <input type="text" name="display_name" id="display_name" value="{{ categoria.display_name|default:'' }}"
+             class="w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" required />
+    </div>
+
+    <div>
+      <label for="slug" class="block text-sm font-semibold mb-1">Slug (para URL)</label>
+      <input type="text" name="slug" id="slug" value="{{ categoria.slug|default:'' }}"
+             class="w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" required />
+             <p class="text-xs text-gray-500 mt-1">Ejemplo: "bodas", "15yearsOld", sin espacios ni tildes.</p>
+             
+    </div>
+
+    <div class="text-right">
+      <button type="submit" class="button px-4">Cambiar Nombre</button>
+    </div>
+  </form>
+
+  <!-- Subida de imágenes -->
+<a href="{% url 'manage_images' categoria.id %}" class="text-sm button text-blue-600 hover:underline">
+  Gestionar imágenes
+</a>
+
+</section>
+{% endblock %}

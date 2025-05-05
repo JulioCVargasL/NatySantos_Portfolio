@@ -1,0 +1,45 @@
+{% extends 'layouts/app.html' %}
+{% load static %}
+
+{% block title %}
+Imágenes | {{ categoria.display_name }} | Nathy Santos
+{% endblock %}
+
+{% block content %}
+<section class="py-10 px-8 max-w-5xl mx-auto bg-white shadow rounded">
+  <!-- Encabezado -->
+  <div class="flex justify-between items-center mb-6">
+    <h2 class="text-2xl font-bold">Imágenes de {{ categoria.display_name }}</h2>
+    <a href="{% url 'edit_category' categoria.id %}" class="text-blue-600 hover:underline">← Volver a editar categoría</a>
+  </div>
+
+  <!-- Subida de imágenes -->
+  <form method="POST" enctype="multipart/form-data" class="space-y-4 mb-8">
+    {% csrf_token %}
+    <label class="block font-semibold text-lg">Agregar nuevas imágenes (.webp)</label>
+    <input type="file" name="imagenes" accept=".webp" multiple class="w-full border border-gray-300 p-2 rounded-md">
+    <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Subir fotos</button>
+  </form>
+
+  <!-- Galería de imágenes -->
+  {% if imagenes %}
+    <h3 class="text-lg font-semibold mb-4">Imágenes actuales</h3>
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+      {% for img in imagenes %}
+        <div class="relative group border rounded shadow overflow-hidden">
+          <img src="{% static img.path %}" alt="{{ img.name }}" class="w-full h-40 object-cover rounded">
+
+          <!-- Botón de eliminar -->
+          <form method="POST" class="absolute top-2 right-2 bg-red-600 rounded-full shadow">
+            {% csrf_token %}
+            <input type="hidden" name="image_name" value="{{ img.name }}">
+            <button type="submit" class="text-white text-sm px-2 py-1 hover:bg-red-700">✕</button>
+          </form>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="text-gray-500">No hay imágenes aún para esta categoría.</p>
+  {% endif %}
+</section>
+{% endblock %}
