@@ -10,6 +10,13 @@ Panel de Categorías | Nathy Santos
   <div class="container mx-auto px-8">
     <h2 class="text-3xl font-bold mb-8">Categorías de Portafolio</h2>
 
+
+    <!-- boton para salir de ls sesion actual -->
+    <form action="{% url 'logout' %}" method="POST" class="inline">
+      {% csrf_token %}
+      <button type="submit" class="text-red-600 hover:text-red-800 font-semibold">Cerrar sesión</button>
+    </form>
+
     <!-- Botón para crear nueva categoría -->
     <div class="mb-6">
       <button onclick="openModal()" class="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded transition">
