@@ -1,10 +1,13 @@
 from django.shortcuts import render, redirect
 from django.core.mail import send_mail
 from django.conf import settings
+from django.contrib import messages
+
 import os
 
 from admin_NathySantos.models import PortfolioCategory
 from django.http import Http404
+
 
 #Pagina principal
 
@@ -77,24 +80,43 @@ def calendar (request):
 
 # Contacto
 
-def contact (request):
-  if request.method == 'POST':
-    nombre = request.POST.get('nombre')
-    correo = request.POST.get('correo')
-    telefono = request.POST.get('telefono')
-    mensaje = request.POST.get('mensaje')
+def contact(request):
+    if request.method == 'POST':
+        nombre = request.POST.get('nombre')
+        correo = request.POST.get('correo')
+        telefono = request.POST.get('telefono')
+        mensaje = request.POST.get('mensaje')
 
-    contenido = f"Nombre: {nombre}\nCorreo: {correo}\nTeléfono: {telefono}\n\nMensaje{mensaje}"
+        contenido = (
+            f"Nuevo mensaje desde el formulario de contacto\n\n"      
+            f"Nombre: {nombre}\n\n"
+            f"Correo: {correo}\n"
+            f"Teléfono: {telefono}\n\n"
+            f"Mensaje:\n{mensaje}"
+        )
 
-    send_mail(
-      subject="Nuevo mensaje de contacto - Nathy Santos WEB",
-      message=contenido,
-      from_email='tuemail@gmail.com',
-      recipient_list=['nathysantosfotografia@gmail.com'],
-      fail_silently=False,
-    )
-    return redirect(request, 'contact')
-  return render(request, 'contact.html')
+        send_mail(
+            subject="Nuevo mensaje de contacto - Nathy Santos WEB",
+            message=contenido,
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            recipient_list=['nathysantosfotografia@gmail.com'],
+            fail_silently=False,
+        )
+
+        enviados = send_mail(
+            subject=f"{nombre} te envio un mensaje - Nathy Santos WEB",
+            message=contenido,
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            recipient_list=['nathysantosfotografia@gmail.com'],
+            fail_silently=False,
+        )
+
+        print("Correos enviados:", enviados)
+
+        messages.success(request, "Tu mensaje fue enviado exitosamente.")
+        return redirect('contact')
+
+    return render(request, 'contact.html')
 
 # Portafolios dinámicos
 
