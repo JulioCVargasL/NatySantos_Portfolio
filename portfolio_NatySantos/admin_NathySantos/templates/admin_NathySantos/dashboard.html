@@ -14,7 +14,7 @@ Panel de Categorías | Nathy Santos
     <!-- boton para salir de ls sesion actual -->
     <form action="{% url 'logout' %}" method="POST" class="inline">
       {% csrf_token %}
-      <button type="submit" class="text-red-600 hover:text-red-800 font-semibold">Cerrar sesión</button>
+      <button type="submit" class="button">Cerrar sesión</button>
     </form>
 
     <!-- Botón para crear nueva categoría -->
