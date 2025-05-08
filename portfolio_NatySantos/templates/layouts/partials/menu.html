@@ -2,24 +2,33 @@
 <!-- Header / Barra de Navegacion -->
 
 <header class="bg-white shadow-md sticky top-0 z-50">
-  <div class="container mx-auto px-6 grid grid-cols-2 items-center">
-    <div class="flex justify-start items-center overflow-hidden h-20">
-      <a href="{% url 'home' %}">
-        <img src="{% static 'img/webp_format/logo/logo_2.webp' %}" alt="Nathy Santos" class="h-28 w-auto">
-      </a>
-    </div>
+  <div class="container mx-auto px-6 flex justify-between items-center h-20">
+    <!-- Logo -->
+    <a href="{% url 'home' %}">
+      <img src="{% static 'img/webp_format/logo/logo_2.webp' %}" alt="Nathy Santos" class="h-28 w-auto">
+    </a>
 
-    <nav class="flex justify-end items-center space-x-6 text-sm font-medium">
-      <!--Ir al Index-->
+    <!-- Botón menú hamburguesa -->
+    <button id="menu-btn" class="text-2xl md:hidden focus:outline-none">
+      &#9776; <!-- símbolo ☰ -->
+    </button>
+
+    <!-- Menú navegación -->
+    <nav id="menu" class="hidden md:flex md:items-center space-x-6 text-sm font-medium">
       <a href="{% url 'home' %}" class="resaltar">HOME</a>
-      <!--Ir al Portfolio-->
       <a href="{% url 'menuPortfolio' %}" class="resaltar">PORTAFOLIO</a>
-      <!--Ir al Calendar-->
       <a href="{% url 'calendar' %}" class="resaltar">CALENDARIO</a>
-      <!--Ir al Contact-->
       <a href="{% url 'contact' %}" class="resaltar">CONTACTO</a>
-      <!--Ir al NathySantos-->
       <a href="{% url 'nathySantos' %}" class="resaltar">¿QUIÉN SOY?</a>
     </nav>
+  </div>
+
+  <!-- Menú desplegable para móviles -->
+  <div id="mobile-menu" class="hidden md:hidden flex flex-col items-center space-y-4 text-sm font-medium bg-white shadow-md py-4">
+    <a href="{% url 'home' %}" class="resaltar text-center">HOME</a>
+    <a href="{% url 'menuPortfolio' %}" class="resaltar text-center">PORTAFOLIO</a>
+    <a href="{% url 'calendar' %}" class="resaltar text-center">CALENDARIO</a>
+    <a href="{% url 'contact' %}" class="resaltar text-center">CONTACTO</a>
+    <a href="{% url 'nathySantos' %}" class="resaltar text-center">¿QUIÉN SOY?</a>
   </div>
 </header>
