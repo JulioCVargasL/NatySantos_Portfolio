@@ -7,8 +7,12 @@ import os
 
 # Create your views here.
 
-@login_required
+@login_required(login_url='/login/')
+def dashboard(request):
+    categorias = PortfolioCategory.objects.all()
+    return render(request, 'admin_NathySantos/dashboard.html', {'categorias': categorias})
 
+@login_required(login_url='/login/')
 def create_category(request):
   if request.method == 'POST':
     form = PortfolioCategoryForm(request.POST)
@@ -23,10 +27,7 @@ def create_category(request):
 
 # definicion CRUD panel-admin
 
-def dashboard(request):
-    categorias = PortfolioCategory.objects.all()
-    return render(request, 'admin_NathySantos/dashboard.html', {'categorias': categorias})
-
+@login_required(login_url='/login/')
 def create_category(request):
     if request.method == 'POST':
         name = request.POST.get('name')
@@ -40,6 +41,8 @@ def create_category(request):
                )
     return redirect('dashboard')
 
+
+@login_required(login_url='/login/')
 def edit_category(request, pk):
     categoria = get_object_or_404(PortfolioCategory, pk=pk)
     form = PortfolioCategoryForm(request.POST or None, instance=categoria)
@@ -56,11 +59,13 @@ def edit_category(request, pk):
         'form_title': f'Editar Categoría: {categoria.display_name}'
     })
 
+@login_required(login_url='/login/')
 def delete_category(request, pk):
     categoria = get_object_or_404(PortfolioCategory, pk=pk)
     categoria.delete()
     return redirect('dashboard')
 
+@login_required(login_url='/login/')
 def manage_category_images(request, pk):
     categoria = get_object_or_404(PortfolioCategory, pk=pk)
     folder_path = os.path.join(settings.BASE_DIR, 'static', 'img', 'webp_format', categoria.slug)
