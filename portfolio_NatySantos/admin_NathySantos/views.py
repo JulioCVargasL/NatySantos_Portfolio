@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import PortfolioCategory, Cliente
 from django.db.models import Q
-from .forms import PortfolioCategoryForm
+from .forms import PortfolioCategoryForm,ClienteForm
 from django.conf import settings
 import os
 
@@ -106,11 +106,33 @@ def manage_category_images(request, pk):
 
 def clientes_list(request):
     query = request.GET.get("q")
-    if query:
-        clientes = Cliente.objects.filter(
-            Q(nombre__icontains=query) | Q(ID_CC__icontains=query)
-        )
-    else:
-        clientes = Cliente.objects.all()
-
+    clientes = Cliente.objects.filter(Q(nombre__icontains=query) | Q(ID_CC__icontains=query)) if query else Cliente.objects.all()
     return render(request, "lista_clientes.html", {"clientes": clientes, "query": query})
+
+def cliente_create(request):
+    if request.method == "POST":
+        form = ClienteForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("clientes_list")
+    else:
+        form = ClienteForm()
+    return render(request, "/form_cliente.html", {"form": form, "titulo": "Nuevo Cliente"})
+
+def cliente_edit(request, pk):
+    cliente = get_object_or_404(Cliente, pk=pk)
+    if request.method == "POST":
+        form = ClienteForm(request.POST, instance=cliente)
+        if form.is_valid():
+            form.save()
+            return redirect("clientes_list")
+    else:
+        form = ClienteForm(instance=cliente)
+    return render(request, "/form_cliente.html", {"form": form, "titulo": "Editar Cliente"})
+
+def cliente_delete(request, pk):
+    cliente = get_object_or_404(Cliente, pk=pk)
+    if request.method == "POST":
+        cliente.delete()
+        return redirect("clientes_list")
+    return render(request, "/eliminar_cliente.html", {"cliente": cliente})
