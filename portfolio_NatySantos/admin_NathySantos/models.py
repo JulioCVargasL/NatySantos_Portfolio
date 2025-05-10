@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.text import slugify
 
-# Create your models here.
+# Gestion de portafolio fotografico/Galerias 
 
 class PortfolioCategory(models.Model):
     name = models.CharField(max_length=50, unique=True)
@@ -35,3 +35,49 @@ class photo(models.Model):
 
   def __str__(self):
     return f"Foto de {self.portfolio.title} (#{self.order})"
+  
+  
+# Gestion de clientes y sesiones fotograficas
+
+class TipoEvento(models.Model):
+    nombre = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.nombre
+
+class EstadoEvento(models.Model):
+    estado = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.estado
+
+class Cliente(models.Model):
+    nombre = models.CharField(max_length=100)
+    ID_CC = models.CharField(max_length=20, unique=True)
+    telefono = models.CharField(max_length=20)
+    email = models.EmailField()
+
+    def __str__(self):
+        return self.nombre
+
+class Evento(models.Model):
+    tipoEvento = models.ForeignKey(TipoEvento, on_delete=models.CASCADE)
+    cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
+    estado = models.ForeignKey(EstadoEvento, on_delete=models.CASCADE)
+    titulo = models.CharField(max_length=200)
+    descripcion = models.TextField(blank=True)
+    ubicacion = models.CharField(max_length=200)
+    fecha_evento = models.DateField()
+    fecha_reserva = models.DateField()
+
+    def __str__(self):
+        return f"{self.titulo} - {self.fecha_evento}"
+
+class SesionFotografica(models.Model):
+    evento = models.ForeignKey(Evento, on_delete=models.CASCADE)
+    nombre = models.CharField(max_length=100)
+    fecha_sesion = models.DateField()
+    galeria_url = models.URLField(blank=True)
+
+    def __str__(self):
+        return f"{self.nombre} - {self.evento}"

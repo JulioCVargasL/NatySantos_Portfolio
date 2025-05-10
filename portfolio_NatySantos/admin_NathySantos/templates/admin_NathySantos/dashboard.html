@@ -14,7 +14,8 @@ Panel de Categorías | Nathy Santos
     <!-- boton para salir de ls sesion actual -->
     <form action="{% url 'logout' %}" method="POST" class="inline">
       {% csrf_token %}
-      <button type="submit" class="bg-green-600 hover:bg-green-700 text-white py-2 px-4 mb-4 rounded transition">Cerrar sesión</button>
+      <button type="submit" class="bg-green-600 hover:bg-green-700 text-white py-2 px-4 mb-4 rounded transition">Cerrar
+        sesión</button>
     </form>
 
     <!-- Botón para crear nueva categoría -->
@@ -60,21 +61,35 @@ Panel de Categorías | Nathy Santos
       {% csrf_token %}
       <div>
         <label class="block text-sm font-medium mb-1">Nombre de la categoría:</label>
-        <input type="text" name="display_name" required class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-400">
+        <input type="text" name="display_name" required
+          class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-400">
       </div>
       <div>
         <label class="block text-sm font-medium mb-1">Slug:</label>
-        <input type="text" name="slug" required class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-400">
+        <input type="text" name="slug" required
+          class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-400">
         <p class="text-xs text-gray-500 mt-1">Ejemplo: "bodas", "15yearsOld", sin espacios ni tildes.</p>
       </div>
       <div class="flex justify-end gap-2">
-        <button type="button" onclick="closeModal()" class="bg-gray-300 hover:bg-gray-400 text-black px-4 py-2 rounded">Cancelar</button>
+        <button type="button" onclick="closeModal()"
+          class="bg-gray-300 hover:bg-gray-400 text-black px-4 py-2 rounded">Cancelar</button>
         <button type="submit" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded">Guardar</button>
       </div>
     </form>
-    <button onclick="closeModal()" class="absolute top-2 right-3 text-gray-500 hover:text-gray-700 text-xl">&times;</button>
+    <button onclick="closeModal()"
+      class="absolute top-2 right-3 text-gray-500 hover:text-gray-700 text-xl">&times;</button>
   </div>
 </div>
+
+<section class="py-4 bg-white m-2">
+  <div class="container mx-auto px-8">
+    <h2 class="text-3xl font-bold mb-8">Gestion de clientes y eventos </h2>
+
+    <a href="{% url 'clientes_list' %}"
+      class="bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded transition ml-2">
+      Gestión de Clientes
+    </a>
+</section>
 
 <script>
   function openModal() {

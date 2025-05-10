@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .models import PortfolioCategory
+from .models import PortfolioCategory, Cliente
+from django.db.models import Q
 from .forms import PortfolioCategoryForm
 from django.conf import settings
 import os
@@ -100,3 +101,16 @@ def manage_category_images(request, pk):
         'categoria': categoria,
         'imagenes': imagenes
     })
+
+#Gestion de Clientes
+
+def clientes_list(request):
+    query = request.GET.get("q")
+    if query:
+        clientes = Cliente.objects.filter(
+            Q(nombre__icontains=query) | Q(ID_CC__icontains=query)
+        )
+    else:
+        clientes = Cliente.objects.all()
+
+    return render(request, "lista_clientes.html", {"clientes": clientes, "query": query})

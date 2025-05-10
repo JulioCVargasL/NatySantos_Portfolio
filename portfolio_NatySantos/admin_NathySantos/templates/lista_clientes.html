@@ -1,0 +1,37 @@
+{% extends 'layouts/app.html' %}
+{% block content %}
+<section class="p-8">
+    <h2 class="text-2xl font-bold mb-4">Gestión de Clientes</h2>
+
+    <form method="GET" class="mb-6">
+        <input type="text" name="q" placeholder="Buscar por nombre o cédula..."
+               value="{{ query|default:'' }}"
+               class="border border-gray-300 rounded-lg px-4 py-2 w-full max-w-md">
+    </form>
+
+    <table class="w-full text-left border-collapse">
+        <thead>
+            <tr class="border-b">
+                <th class="px-4 py-2">Nombre</th>
+                <th class="px-4 py-2">Cédula</th>
+                <th class="px-4 py-2">Teléfono</th>
+                <th class="px-4 py-2">Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cliente in clientes %}
+            <tr class="border-b hover:bg-gray-100">
+                <td class="px-4 py-2">{{ cliente.nombre }}</td>
+                <td class="px-4 py-2">{{ cliente.ID_CC }}</td>
+                <td class="px-4 py-2">{{ cliente.telefono }}</td>
+                <td class="px-4 py-2">{{ cliente.email }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4" class="text-center py-4 text-gray-500">No se encontraron clientes.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+{% endblock %}
