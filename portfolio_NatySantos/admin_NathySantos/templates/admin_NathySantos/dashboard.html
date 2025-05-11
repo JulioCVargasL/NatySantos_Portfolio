@@ -6,17 +6,32 @@ Panel de Categorías | Nathy Santos
 {% endblock %}
 
 {% block content %}
-<section class="py-16 bg-white">
-  <div class="container mx-auto px-8">
-    <h2 class="text-3xl font-bold mb-8">Categorías de Portafolio</h2>
 
+<section class="py-8 m-2 relative">
 
+  <div class="absolute top-4 right-4">
     <!-- boton para salir de ls sesion actual -->
     <form action="{% url 'logout' %}" method="POST" class="inline">
       {% csrf_token %}
       <button type="submit" class="bg-green-600 hover:bg-green-700 text-white py-2 px-4 mb-4 rounded transition">Cerrar
         sesión</button>
     </form>
+  </div>
+</section>
+<section class="py-8 bg-white m-2 relative">
+
+  <div class="container mx-auto px-8">
+    <h2 class="text-3xl font-bold mb-8">Gestion de clientes y eventos </h2>
+
+    <a href="{% url 'clientes_list' %}"
+      class="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded transition ml-2">
+      Gestión de Clientes
+    </a>
+</section>
+
+<section class="py-8 bg-white">
+  <div class="container mx-auto px-8">
+    <h2 class="text-3xl font-bold mb-8">Categorías de Portafolio</h2>
 
     <!-- Botón para crear nueva categoría -->
     <div class="mb-6">
@@ -80,16 +95,6 @@ Panel de Categorías | Nathy Santos
       class="absolute top-2 right-3 text-gray-500 hover:text-gray-700 text-xl">&times;</button>
   </div>
 </div>
-
-<section class="py-4 bg-white m-2">
-  <div class="container mx-auto px-8">
-    <h2 class="text-3xl font-bold mb-8">Gestion de clientes y eventos </h2>
-
-    <a href="{% url 'clientes_list' %}"
-      class="bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded transition ml-2">
-      Gestión de Clientes
-    </a>
-</section>
 
 <script>
   function openModal() {

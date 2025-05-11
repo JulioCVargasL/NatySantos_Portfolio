@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .models import PortfolioCategory, Cliente
+from .models import PortfolioCategory, Cliente,SesionFotografica,Evento
 from django.db.models import Q
-from .forms import PortfolioCategoryForm,ClienteForm
+from .forms import PortfolioCategoryForm,ClienteForm, SesionFotograficaForm
 from django.conf import settings
 import os
 
@@ -105,9 +105,22 @@ def manage_category_images(request, pk):
 #Gestion de Clientes
 
 def clientes_list(request):
-    query = request.GET.get("q")
-    clientes = Cliente.objects.filter(Q(nombre__icontains=query) | Q(ID_CC__icontains=query)) if query else Cliente.objects.all()
-    return render(request, "clientes/lista_clientes.html", {"clientes": clientes, "query": query})
+  query = request.GET.get("q", "").strip()
+
+  if query:
+      if query.isdigit():
+          # Si es número, ordenamos por coincidencia de cédula
+          clientes = Cliente.objects.filter(ID_CC__icontains=query).order_by('ID_CC')
+      else:
+          # Si es texto, ordenamos por coincidencia en nombre
+          clientes = Cliente.objects.filter(nombre__icontains=query).order_by('nombre')
+  else:
+      # Sin búsqueda, mostrar ordenados por nombre
+      clientes = Cliente.objects.all().order_by('nombre')
+
+  return render(request, 'clientes/lista_clientes.html', {"clientes": clientes, "query": query})
+
+#CRUD Clientes
 
 def cliente_create(request):
     if request.method == "POST":
@@ -128,7 +141,7 @@ def cliente_edit(request, pk):
             return redirect("clientes_list")
     else:
         form = ClienteForm(instance=cliente)
-    return render(request, "/form_cliente.html", {"form": form, "titulo": "Editar Cliente"})
+    return render(request, "clientes/sesiones.html", {"form": form, "titulo": "Editar Cliente"})
 
 def cliente_delete(request, pk):
     cliente = get_object_or_404(Cliente, pk=pk)
@@ -136,3 +149,24 @@ def cliente_delete(request, pk):
         cliente.delete()
         return redirect("clientes_list")
     return render(request, "/eliminar_cliente.html", {"cliente": cliente})
+
+#Gestion de Sesiones
+
+def cliente_sesiones(request, pk):
+    cliente = get_object_or_404(Cliente, pk=pk)
+    eventos = Evento.objects.filter(cliente=cliente)
+    sesiones = SesionFotografica.objects.filter(evento__in=eventos)
+
+    form = SesionFotograficaForm(request.POST or None)
+    if request.method == 'POST' and form.is_valid():
+        nueva_sesion = form.save(commit=False)
+        nueva_sesion.evento = eventos.first()  
+        nueva_sesion.save()
+        return redirect('cliente_sesiones', pk=pk)
+
+    return render(request, 'clientes/sesiones.html', {
+        'cliente': cliente,
+        'sesiones': sesiones,
+        'form': form,
+        'eventos': eventos,
+    })

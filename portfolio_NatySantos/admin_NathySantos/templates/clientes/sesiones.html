@@ -1,0 +1,57 @@
+{% extends 'layouts/app.html' %}
+{% block content %}
+
+<section class="p-8">
+  <!-- Botón de regreso -->
+  <a href="{% url 'dashboard' %}" 
+     class="mb-4 inline-block bg-gray-200 hover:bg-gray-300 text-gray-700 text-sm font-medium py-2 px-4 rounded shadow">
+    &#8592; Regresar
+  </a>
+  <h2 class="text-2xl font-bold mb-4">Sesiones de {{ cliente.nombre }}</h2>
+
+
+  <form method="post" class="mb-6 space-y-4">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Agregar Sesión</button>
+  </form>
+
+  <table class="w-full text-left border-collapse">
+    <thead>
+      <tr class="border-b">
+        <th class="px-4 py-2">Nombre</th>
+        <th class="px-4 py-2">Fecha</th>
+        <th class="px-4 py-2">Galería</th>
+        <th class="px-4 py-2">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for sesion in sesiones %}
+      <tr class="border-b hover:bg-gray-100">
+        <td class="px-4 py-2">{{ sesion.nombre }}</td>
+        <td class="px-4 py-2">{{ sesion.fecha_sesion }}</td>
+        <td class="px-4 py-2">
+          {% if sesion.galeria_url %}
+          <a href="{{ sesion.galeria_url }}" target="_blank" class="text-blue-600 hover:underline">Ver galería</a>
+          {% else %}
+          <span class="text-gray-500">No disponible</span>
+          {% endif %}
+        </td>
+        <td class="px-4 py-2">
+          <!-- Aquí podrías agregar editar y eliminar -->
+          <form method="POST" action="{% url 'cliente_sesiones' cliente.pk %}" class="inline">
+            {% csrf_token %}
+            <input type="hidden" name="eliminar" value="{{ sesion.pk }}">
+            <button type="submit" class="text-red-600 hover:underline" onclick="return confirm('¿Eliminar esta sesión?')">Eliminar</button>
+          </form>
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="4" class="text-center py-4 text-gray-500">No hay sesiones aún.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endblock %}
