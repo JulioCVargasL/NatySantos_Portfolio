@@ -12,5 +12,9 @@ urlpatterns = [
     path('clientes/nuevo/', views.cliente_create, name='cliente_create'),
     path('clientes/editar/<int:pk>/', views.cliente_edit, name='cliente_edit'),
     path('clientes/eliminar/<int:pk>/', views.cliente_delete, name='cliente_delete'),
-    path('clientes/<int:pk>/sesiones', views.cliente_sesiones, name='cliente_sesiones'),
+    path('clientes/<int:cliente_id>/nueva-sesion/', views.Evento, name='crear_evento'),
+    path('clientes/<int:cliente_id>/nueva_sesion/', views.crear_evento, name='crear_evento'),
+    path('tipo-evento/nuevo', views.tipo_evento_create, name='tipo_evento_create'),
+    path('api/tipo-eventos/', views.api_tipo_eventos, name='api_tipo_eventos'),
+    path('api/tipo-eventos/delete/<int:pk>/', views.delete_tipo_evento, name='delete_tipo_evento'),
 ]

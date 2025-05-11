@@ -72,12 +72,3 @@ class Evento(models.Model):
 
     def __str__(self):
         return f"{self.titulo} - {self.fecha_evento}"
-
-class SesionFotografica(models.Model):
-    evento = models.ForeignKey(Evento, on_delete=models.CASCADE)
-    nombre = models.CharField(max_length=100)
-    fecha_sesion = models.DateField()
-    galeria_url = models.URLField(blank=True)
-
-    def __str__(self):
-        return f"{self.nombre} - {self.evento}"

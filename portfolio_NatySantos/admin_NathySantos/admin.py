@@ -2,7 +2,7 @@
 from django.contrib import admin
 from django.urls import path
 from django.utils.html import format_html
-from .models import PortfolioCategory
+from .models import PortfolioCategory,Cliente, Evento, TipoEvento, EstadoEvento
 from .views import create_category
 
 # Gestion de Portafolio
@@ -15,9 +15,6 @@ admin.site.register(PortfolioCategory, PortfolioCategoryAdmin)
 
 # Gestion de clientes/Sesiones
 
-from django.contrib import admin
-from .models import Cliente, Evento, SesionFotografica, TipoEvento, EstadoEvento
-
 @admin.register(Cliente)
 class ClienteAdmin(admin.ModelAdmin):
     list_display = ('nombre', 'ID_CC', 'telefono', 'email')
@@ -28,11 +25,6 @@ class EventoAdmin(admin.ModelAdmin):
     list_display = ('titulo', 'cliente', 'tipoEvento', 'estado', 'fecha_evento', 'fecha_reserva')
     list_filter = ('estado', 'tipoEvento')
     search_fields = ('titulo', 'cliente__nombre')
-
-@admin.register(SesionFotografica)
-class SesionFotograficaAdmin(admin.ModelAdmin):
-    list_display = ('nombre', 'evento', 'fecha_sesion')
-    search_fields = ('nombre', 'evento__titulo')
 
 admin.site.register(TipoEvento)
 admin.site.register(EstadoEvento)

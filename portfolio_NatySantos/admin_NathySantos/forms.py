@@ -17,10 +17,4 @@ class ClienteForm(forms.ModelForm):
 
 # Gestion de Sesiones
 
-from .models import SesionFotografica
-from django import forms
 
-class SesionFotograficaForm(forms.ModelForm):
-    class Meta:
-        model = SesionFotografica
-        fields = ['nombre', 'fecha_sesion', 'galeria_url']

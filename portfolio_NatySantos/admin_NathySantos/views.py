@@ -1,9 +1,11 @@
-from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .models import PortfolioCategory, Cliente,SesionFotografica,Evento
+from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Q
-from .forms import PortfolioCategoryForm,ClienteForm, SesionFotograficaForm
+from django.http import JsonResponse
 from django.conf import settings
+from .models import PortfolioCategory, Cliente,Evento, TipoEvento, EstadoEvento
+from .forms import PortfolioCategoryForm,ClienteForm
 import os
 
 # Create your views here.
@@ -152,21 +154,54 @@ def cliente_delete(request, pk):
 
 #Gestion de Sesiones
 
-def cliente_sesiones(request, pk):
-    cliente = get_object_or_404(Cliente, pk=pk)
-    eventos = Evento.objects.filter(cliente=cliente)
-    sesiones = SesionFotografica.objects.filter(evento__in=eventos)
+def crear_evento(request, cliente_id):
+    cliente = get_object_or_404(Cliente, pk=cliente_id)
+    tipo_eventos = TipoEvento.objects.all()
+    estado_default = EstadoEvento.objects.first()  # Puedes ajustar esto si usas estados tipo "Pendiente"
 
-    form = SesionFotograficaForm(request.POST or None)
-    if request.method == 'POST' and form.is_valid():
-        nueva_sesion = form.save(commit=False)
-        nueva_sesion.evento = eventos.first()  
-        nueva_sesion.save()
-        return redirect('cliente_sesiones', pk=pk)
+    if request.method == 'POST':
+        tipo_evento_id = request.POST.get('tipo_evento')
+        fecha_evento = request.POST.get('fecha_evento')
+        comentarios = request.POST.get('descripcion', '')
+        
+        tipo_evento = get_object_or_404(TipoEvento, pk=tipo_evento_id)
+
+        Evento.objects.create(
+            tipoEvento=tipo_evento,
+            cliente=cliente,
+            estado=estado_default,
+            titulo=f"{tipo_evento.nombre} de {cliente.nombre}",
+            descripcion=comentarios,
+            ubicacion="",  # campo vacío por ahora
+            fecha_evento=fecha_evento,
+            fecha_reserva=fecha_evento
+        )
+
+        return redirect('clientes_list')
 
     return render(request, 'clientes/sesiones.html', {
         'cliente': cliente,
-        'sesiones': sesiones,
-        'form': form,
-        'eventos': eventos,
+        'tipo_eventos': tipo_eventos
     })
+
+# Tipos de eventos
+
+def tipo_evento_create(request):
+    if request.method == 'POST':
+        nombre = request.POST.get('nombre')
+        if nombre:
+            TipoEvento.objects.create(nombre=nombre)
+    return redirect(request.META.get('HTTP_REFERER', 'clientes_list'))
+
+#API creasion de eventos
+
+def api_tipo_eventos(request):
+    tipos = TipoEvento.objects.all().values('id', 'nombre')
+    return JsonResponse(list(tipos), safe=False)
+
+@csrf_exempt
+def delete_tipo_evento(request, pk):
+    if request.method == 'POST':
+        TipoEvento.objects.filter(pk=pk).delete()
+        return JsonResponse({'success': True})
+    return JsonResponse({'success': False}, status=400)
