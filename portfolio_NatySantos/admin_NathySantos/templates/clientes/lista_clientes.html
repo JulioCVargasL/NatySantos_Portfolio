@@ -1,0 +1,87 @@
+{% extends 'layouts/app.html' %}
+{% block content %}
+<section class="py-10 px-6 max-w-4xl my-4 mx-auto bg-white shadow-md rounded-lg relative">
+
+  <h2 class="text-2xl font-bold mb-4">Gestión de Clientes</h2>
+
+  <!-- Botón de regreso -->
+  <a href="{% url 'dashboard' %}" class="top-4 left-4  bg-gray-200 hover:bg-gray-300 text-gray-700 text-sm font-medium py-2 px-4 rounded flex items-center shadow my-8 w-1/4 text-justify">
+    &#8592; Regresar
+  </a>
+
+  <!--boón nuevo cliente-->
+
+   <button onclick="toggleModal()" 
+        class="mb-4 inline-block bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded shadow">
+  ➕ Nuevo Cliente
+  </button>
+
+  <form method="GET" class="mb-6">
+      <input type="text" name="q" placeholder="Buscar por nombre o cédula..."
+              value="{{ query|default:'' }}"
+              class="border border-gray-300 rounded-lg px-4 py-2 w-full max-w-md">
+  </form>
+
+  <table class="w-full text-left border-collapse">
+      <thead>
+          <tr class="border-b">
+              <th class="px-4 py-2">Nombre</th>
+              <th class="px-4 py-2">Cédula</th>
+              <th class="px-4 py-2">Teléfono</th>
+              <th class="px-4 py-2">Email</th>
+              <th class="px-4 py-2">Acciones</th>
+          </tr>
+      </thead>
+      <tbody>
+        {% for cliente in clientes %}
+          {% if cliente.pk %}
+          <tr class="border-b hover:bg-gray-100">
+            <td class="px-4 py-2">{{ cliente.nombre }}</td>
+            <td class="px-4 py-2">{{ cliente.ID_CC }}</td>
+            <td class="px-4 py-2">{{ cliente.telefono }}</td>
+            <td class="px-4 py-2">{{ cliente.email }}</td>
+            <td class="px-4 py-2 flex space-x-2">
+              <a href="{% url 'cliente_edit' cliente.pk %}" class="text-blue-600 hover:underline">Administrar</a>
+              <form method="POST" action="{% url 'cliente_delete' cliente.pk %}" onsubmit="return confirm('¿Eliminar este cliente?');">
+                {% csrf_token %}
+                <button type="submit" class="text-red-600 hover:underline">Eliminar</button>
+              </form>
+            </td>
+          </tr>
+          {% endif %}
+        {% empty %}
+          <tr>
+            <td colspan="5" class="text-center py-4 text-gray-500">Aún no hay clientes registrados.</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+  </table>
+</section>
+
+<!-- Modal para crear cliente -->
+
+<div id="clienteModal" class="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center hidden z-50">
+  <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+    <h2 class="text-xl font-bold mb-4">Nuevo Cliente</h2>
+    <form id="clienteForm" method="POST" action="{% url 'cliente_create' %}" class="space-y-4">
+      {% csrf_token %}
+      <input type="text" name="nombre" placeholder="Nombre" required class="w-full border px-4 py-2 rounded" />
+      <input type="text" name="ID_CC" placeholder="Cédula" required class="w-full border px-4 py-2 rounded" />
+      <input type="text" name="telefono" placeholder="Teléfono" class="w-full border px-4 py-2 rounded" />
+      <input type="email" name="email" placeholder="Email" class="w-full border px-4 py-2 rounded" />
+
+      <div class="flex justify-end space-x-4">
+        <button type="button" onclick="toggleModal()" class="text-gray-600 hover:underline">Cancelar</button>
+        <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded">Guardar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  function toggleModal() {
+    document.getElementById("clienteModal").classList.toggle("hidden");
+  }
+</script>
+
+{% endblock %}

@@ -107,7 +107,7 @@ def manage_category_images(request, pk):
 def clientes_list(request):
     query = request.GET.get("q")
     clientes = Cliente.objects.filter(Q(nombre__icontains=query) | Q(ID_CC__icontains=query)) if query else Cliente.objects.all()
-    return render(request, "lista_clientes.html", {"clientes": clientes, "query": query})
+    return render(request, "clientes/lista_clientes.html", {"clientes": clientes, "query": query})
 
 def cliente_create(request):
     if request.method == "POST":
