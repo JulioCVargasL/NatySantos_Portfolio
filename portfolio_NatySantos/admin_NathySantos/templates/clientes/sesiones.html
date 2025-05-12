@@ -1,53 +1,109 @@
 {% extends 'layouts/app.html' %}
 {% block content %}
-<section class="p-8 max-w-xl mx-auto bg-white shadow-md rounded-lg relative">
+<section class="p-4 m-8 bg-white shadow-md rounded-lg relative">
 
   <!-- Botón de regreso -->
-  <a href="{% url 'clientes_list' %}" 
-     class="absolute top-4 right-4 bg-gray-200 hover:bg-gray-300 text-gray-700 text-sm font-medium py-2 px-4 rounded shadow">
+  <a href="{% url 'clientes_list' %}"
+    class="absolute top-4 right-4 bg-gray-200 hover:bg-gray-300 text-gray-700 text-sm font-medium py-2 px-4 rounded shadow">
     &#8592; Regresar
   </a>
 
-  <h2 class="text-2xl font-bold mt-12 text-center">Nueva Sesión para {{ cliente.nombre }}</h2>
+  <!-- Botón para abrir el modal -->
+<button onclick="toggleSesionModal()"
+  class="inline-block bg-green-600 hover:bg-green-700 text-white py-2 px-4 m-8 rounded shadow">
+  + Nueva Sesión
+</button>
 
-  <form method="POST" class="space-y-6">
-    {% csrf_token %}
+<!-- Modal de Nueva Sesión -->
+<div id="sesionModal" class="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center hidden z-50">
+  <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-xl space-y-6 relative">
 
-    <!-- Tipo de evento -->
-    <div>
-      <label for="tipo_evento" class="block font-semibold mb-1">Tipo de Evento</label>
-      <select name="tipo_evento" id="tipo_evento" required class="w-full border px-4 py-2 rounded">
-        {% for tipo in tipo_eventos %}
+    <h2 class="text-xl font-bold text-center">Crear Nueva Sesión</h2>
+
+    <form method="POST" class="space-y-6">
+      {% csrf_token %}
+
+      <!-- Tipo de evento -->
+      <div>
+        <label for="tipo_evento" class="block font-semibold mb-1">Tipo de Evento</label>
+        <select name="tipo_evento" id="tipo_evento" required class="w-full border px-4 py-2 rounded">
+          {% for tipo in tipo_eventos %}
           <option value="{{ tipo.id }}">{{ tipo.nombre }}</option>
-        {% endfor %}
-      </select>
-      <button type="button" onclick="toggleTipoEventoModal()" class="text-sm text-blue-600 hover:underline ml-1 mt-2">
-        + Crear nuevo tipo
-      </button>
-    </div>
+          {% endfor %}
+        </select>
+        <button type="button" onclick="toggleTipoEventoModal()"
+          class="text-sm text-blue-600 hover:underline ml-1 mt-2">
+          + Crear nuevo tipo
+        </button>
+      </div>
 
-    <!-- Fecha -->
-    <div>
-      <label for="fecha_evento" class="block font-semibold mb-1">Fecha del Evento</label>
-      <input type="date" name="fecha_evento" id="fecha_evento" required class="w-full border px-4 py-2 rounded" />
-    </div>
+      <!-- Fecha -->
+      <div>
+        <label for="fecha_evento" class="block font-semibold mb-1">Fecha del Evento</label>
+        <input type="date" name="fecha_evento" id="fecha_evento" required class="w-full border px-4 py-2 rounded" />
+      </div>
 
-    <!-- Comentarios -->
-    <div>
-      <label for="descripcion" class="block font-semibold mb-1">Comentarios (opcional)</label>
-      <textarea name="descripcion" id="descripcion" rows="4"
-        class="w-full border px-4 py-2 rounded resize-none" placeholder="Observaciones sobre la sesión..."></textarea>
-    </div>
+      <!-- Comentarios -->
+      <div>
+        <label for="descripcion" class="block font-semibold mb-1">Comentarios (opcional)</label>
+        <textarea name="descripcion" id="descripcion" rows="4" class="w-full border px-4 py-2 rounded resize-none"
+          placeholder="Observaciones sobre la sesión..."></textarea>
+      </div>
 
-    <!-- Botón Guardar -->
-    <div class="flex justify-end">
-      <button type="submit"
-        class="bg-green-600 hover:bg-green-700 text-white font-medium px-6 py-2 rounded shadow transition">
-        Guardar Sesión
-      </button>
-    </div>
-  </form>
+      <!-- Botones -->
+      <div class="flex justify-end space-x-4">
+        <button type="button" onclick="toggleSesionModal()"
+          class="text-gray-600 hover:underline">Cancelar</button>
+        <button type="submit"
+          class="bg-green-600 hover:bg-green-700 text-white font-medium px-6 py-2 rounded shadow transition">
+          Guardar Sesión
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
 
+<!-- Seccion lista de evento del cliente -->
+
+<section class="p-4 m-8 bg-white shadow-md rounded-lg relative">
+  
+  <h3 class="text-xl font-bold mb-4">Sesiones creadas para: {{ cliente.nombre }}</h3>
+
+  <hr class="my-2">
+
+  <table class="w-full text-left border-collapse">
+    <thead>
+      <tr class="border-b font-semibold">
+        <th class="px-4 py-2">Tipo</th>
+        <th class="px-4 py-2">Fecha</th>
+        <th class="px-4 py-2">Estado</th>
+        <th class="px-4 py-2">Comentarios</th>
+        <th class="px-4 py-2">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for evento in eventos %}
+      <tr class="border-b hover:bg-gray-50">
+        <td class="px-4 py-2">{{ evento.tipoEvento.nombre }}</td>
+        <td class="px-4 py-2">{{ evento.fecha_evento }}</td>
+        <td class="px-4 py-2">{{ evento.estado.estado }}</td>
+        <td class="px-4 py-2">{{ evento.descripcion|default:"—" }}</td>
+        <td class="px-4 py-2 flex space-x-2">
+          <a href="{% url 'editar_evento' evento.pk %}" class="text-blue-600 hover:underline">Editar</a>
+          <form method="POST" action="{% url 'eliminar_evento' evento.pk %}"
+            onsubmit="return confirm('¿Eliminar esta sesión?');">
+            {% csrf_token %}
+            <button type="submit" class="text-red-600 hover:underline">Eliminar</button>
+          </form>
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="5" class="text-center py-4 text-gray-500">No hay sesiones registradas.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 </section>
 
 <!-- Modal Crear y Gestionar Tipos de Evento -->
@@ -60,11 +116,9 @@
     <form id="tipoEventoForm" method="POST" onsubmit="crearTipoEvento(event)">
       {% csrf_token %}
       <div class="flex space-x-2">
-        <input type="text" name="nombre" id="nuevo_tipo_nombre"
-               placeholder="Nuevo tipo..." required
-               class="w-full border px-4 py-2 rounded" />
-        <button type="submit"
-                class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded">
+        <input type="text" name="nombre" id="nuevo_tipo_nombre" placeholder="Nuevo tipo..." required
+          class="w-full border px-4 py-2 rounded" />
+        <button type="submit" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded">
           Guardar
         </button>
       </div>
@@ -85,6 +139,11 @@
 </div>
 
 <script>
+
+  function toggleSesionModal() {
+    document.getElementById("sesionModal").classList.toggle("hidden");
+  }
+
   function toggleTipoEventoModal() {
     const modal = document.getElementById("tipoEventoModal");
     modal.classList.toggle("hidden");
@@ -106,11 +165,11 @@
       },
       body: new URLSearchParams({ nombre })
     })
-    .then(() => {
-      document.getElementById("nuevo_tipo_nombre").value = "";
-      cargarTiposEvento();
-      actualizarSelectTipos(); // actualiza el dropdown del formulario principal
-    });
+      .then(() => {
+        document.getElementById("nuevo_tipo_nombre").value = "";
+        cargarTiposEvento();
+        actualizarSelectTipos(); // actualiza el dropdown del formulario principal
+      });
   }
 
   function cargarTiposEvento() {

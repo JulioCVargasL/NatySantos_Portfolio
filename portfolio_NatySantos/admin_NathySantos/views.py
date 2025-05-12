@@ -157,7 +157,11 @@ def cliente_delete(request, pk):
 def crear_evento(request, cliente_id):
     cliente = get_object_or_404(Cliente, pk=cliente_id)
     tipo_eventos = TipoEvento.objects.all()
-    estado_default = EstadoEvento.objects.first()  # Puedes ajustar esto si usas estados tipo "Pendiente"
+    eventos = Evento.objects.filter(cliente=cliente).order_by('-fecha_evento')
+
+    estado_default = EstadoEvento.objects.filter(estado="Pendiente").first()
+    if not estado_default:
+      estado_default  = EstadoEvento.objects.create(estado="Pendiente")
 
     if request.method == 'POST':
         tipo_evento_id = request.POST.get('tipo_evento')
@@ -177,11 +181,12 @@ def crear_evento(request, cliente_id):
             fecha_reserva=fecha_evento
         )
 
-        return redirect('clientes_list')
+        return redirect('crear_evento', cliente_id=cliente.id)
 
     return render(request, 'clientes/sesiones.html', {
         'cliente': cliente,
-        'tipo_eventos': tipo_eventos
+        'tipo_eventos': tipo_eventos,
+        'eventos': eventos,
     })
 
 # Tipos de eventos
@@ -193,7 +198,7 @@ def tipo_evento_create(request):
             TipoEvento.objects.create(nombre=nombre)
     return redirect(request.META.get('HTTP_REFERER', 'clientes_list'))
 
-#API creasion de eventos
+#API creasion de tipos de eventos
 
 def api_tipo_eventos(request):
     tipos = TipoEvento.objects.all().values('id', 'nombre')
@@ -205,3 +210,33 @@ def delete_tipo_evento(request, pk):
         TipoEvento.objects.filter(pk=pk).delete()
         return JsonResponse({'success': True})
     return JsonResponse({'success': False}, status=400)
+
+# CRUD Eventos
+
+def editar_evento(request, pk):
+    evento = get_object_or_404(Evento, pk=pk)
+    tipo_eventos = TipoEvento.objects.all()
+    estados = EstadoEvento.objects.all()
+
+    if request.method == 'POST':
+        evento.tipoEvento_id = request.POST.get('tipo_evento')
+        evento.estado_id = request.POST.get('estado')
+        evento.fecha_evento = request.POST.get('fecha_evento')
+        evento.descripcion = request.POST.get('descripcion')
+        evento.ubicacion = request.POST.get('ubicacion')
+        evento.save()
+        return redirect('crear_evento', cliente_id=evento.cliente.pk)
+
+    return render(request, 'clientes/editar_evento.html', {
+        'evento': evento,
+        'tipo_eventos': tipo_eventos,
+        'estados': estados,
+    })
+
+
+def eliminar_evento(request, pk):
+    evento = get_object_or_404(Evento, pk=pk)
+    cliente_id = evento.cliente.pk
+    if request.method == 'POST':
+        evento.delete()
+    return redirect('crear_evento', cliente_id=cliente_id)

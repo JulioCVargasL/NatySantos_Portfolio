@@ -68,7 +68,7 @@ class Evento(models.Model):
     descripcion = models.TextField(blank=True)
     ubicacion = models.CharField(max_length=200)
     fecha_evento = models.DateField()
-    fecha_reserva = models.DateField()
+    fecha_reserva = models.DateField(auto_now_add=True)
 
     def __str__(self):
         return f"{self.titulo} - {self.fecha_evento}"

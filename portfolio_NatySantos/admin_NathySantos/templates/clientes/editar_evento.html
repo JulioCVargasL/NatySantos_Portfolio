@@ -1,0 +1,75 @@
+{% extends 'layouts/app.html' %}
+{% block content %}
+<section class="p-8 max-w-xl mx-auto bg-white shadow-md rounded-lg relative">
+
+  <a href="{% url 'crear_evento' evento.cliente.pk %}" 
+     class="absolute top-4 right-4 bg-gray-200 hover:bg-gray-300 text-gray-700 text-sm font-medium py-2 px-4 rounded shadow">
+    &#8592; Regresar
+  </a>
+
+  <h2 class="text-2xl font-bold mt-12 text-center">Editar Sesión para {{ evento.cliente.nombre }}</h2>
+
+  <form method="POST" class="space-y-6">
+    {% csrf_token %}
+
+    <!-- Tipo de Evento -->
+    <div>
+      <label class="block font-semibold mb-1">Tipo de Evento</label>
+      <select name="tipo_evento" required class="w-full border px-4 py-2 rounded">
+        {% for tipo in tipo_eventos %}
+          <option value="{{ tipo.id }}" {% if tipo.id == evento.tipoEvento.id %}selected{% endif %}>
+            {{ tipo.nombre }}
+          </option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <!-- Estado del Evento -->
+    <div>
+      <label class="block font-semibold mb-1">Estado</label>
+      <select name="estado" required class="w-full border px-4 py-2 rounded">
+        {% for estado in estados %}
+          <option value="{{ estado.id }}" {% if estado.id == evento.estado.id %}selected{% endif %}>
+            {{ estado.estado }}
+          </option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <!-- Fecha del Evento -->
+    <div>
+      <label class="block font-semibold mb-1">Fecha del Evento</label>
+      <input type="date" name="fecha_evento" value="{{ evento.fecha_evento|date:'Y-m-d' }}"
+             class="w-full border px-4 py-2 rounded" required>
+    </div>
+
+    <!-- Fecha de Reserva -->
+    <div>
+      <label class="block font-semibold mb-1">Fecha de Reserva</label>
+      <input type="date" name="fecha_reserva" value="{{ evento.fecha_reserva|date:'Y-m-d' }}"
+       class="w-full border px-4 py-2 rounded bg-gray-100 cursor-not-allowed"
+       readonly>
+    </div>
+
+    <!-- Ubicación -->
+    <div>
+      <label class="block font-semibold mb-1">Ubicación</label>
+      <input type="text" name="ubicacion" value="{{ evento.ubicacion }}"
+             class="w-full border px-4 py-2 rounded" placeholder="Ej: Bucaramanga, Salón XYZ">
+    </div>
+
+    <!-- Comentarios -->
+    <div>
+      <label class="block font-semibold mb-1">Comentarios</label>
+      <textarea name="descripcion" rows="4" class="w-full border px-4 py-2 rounded">{{ evento.descripcion }}</textarea>
+    </div>
+
+    <div class="flex justify-end">
+      <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded">
+        Guardar Cambios
+      </button>
+    </div>
+  </form>
+
+</section>
+{% endblock %}
