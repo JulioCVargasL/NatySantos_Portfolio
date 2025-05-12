@@ -4,8 +4,13 @@
 
   <!-- Botón de regreso -->
   <a href="{% url 'clientes_list' %}"
-    class="absolute top-4 right-4 bg-gray-200 hover:bg-gray-300 text-gray-700 text-sm font-medium py-2 px-4 rounded shadow">
+    class="absolute top-16 right-4 bg-gray-200 hover:bg-gray-300 text-gray-700 text-sm font-medium py-2 px-4 rounded shadow">
     &#8592; Regresar
+  </a>
+
+  <a href="{% url 'dashboard' %}"
+    class="absolute top-4 right-4 bg-gray-200 hover:bg-gray-300 text-gray-700 text-sm font-medium py-2 px-4 rounded flex items-center shadow">
+    &#8592; Dashboard
   </a>
 
   <!-- Botón para abrir el modal -->
@@ -67,7 +72,7 @@
 
 <section class="p-4 m-8 bg-white shadow-md rounded-lg relative">
   
-  <h3 class="text-xl font-bold mb-4">Sesiones creadas para: {{ cliente.nombre }}</h3>
+  <h3 class="text-xl font-bold mb-4">Sesiones de: {{ cliente.nombre }}</h3>
 
   <hr class="my-2">
 

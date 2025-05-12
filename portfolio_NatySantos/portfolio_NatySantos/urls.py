@@ -32,5 +32,8 @@ urlpatterns = [
     path('calendar', calendar, name='calendar'),
     path('portfolio/<slug:category_slug>/', views.portfolio_dynamic_view, name= 'dynamic_portfolio'),
     path('', include('admin_NathySantos.urls')),
-    path('admin-panel/', include('admin_NathySantos.urls'))
+    path('admin-panel/', include('admin_NathySantos.urls')),
+    path('portfolio/15yerasold.html', views.portfolio_dynamic_view, {'category_slug': '15yearsold'}, name='15yearsOld' ),
+    path('portfolio/bodas.html', views.portfolio_dynamic_view,{'category_slug': 'bodas'}, name='bodas' ),
+    path('portfolio/portiempo.html', views.portfolio_dynamic_view, {'category_slug': 'portiempo'}, name='portiempo' ),
 ]
