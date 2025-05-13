@@ -2,8 +2,9 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Q
-from django.http import JsonResponse
+from django.http import JsonResponse,HttpResponseRedirect
 from django.conf import settings
+from django.urls import reverse
 from calendar import month_name
 from .models import PortfolioCategory, Cliente,Evento, TipoEvento, EstadoEvento
 from .forms import PortfolioCategoryForm,ClienteForm
@@ -127,13 +128,15 @@ def clientes_list(request):
 @login_required(login_url='/login/')
 def cliente_create(request):
     if request.method == "POST":
+        print("Se envió el formulario")
         form = ClienteForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect("clientes_list")
-    else:
-        form = ClienteForm()
-    return render(request, "/form_cliente.html", {"form": form, "titulo": "Nuevo Cliente"})
+        else:
+            print("Errores del formulario:", form.errors) 
+    return redirect("clientes_list")
+
 @login_required(login_url='/login/')
 def cliente_edit(request, pk):
     cliente = get_object_or_404(Cliente, pk=pk)

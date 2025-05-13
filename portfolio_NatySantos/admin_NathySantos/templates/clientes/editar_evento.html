@@ -35,6 +35,9 @@
           </option>
         {% endfor %}
       </select>
+      <a href="javascript:void(0);" onclick="toggleTipoEventoModal()" class="text-sm text-blue-600 hover:underline mt-2 inline-block">
+        + Crear nuevo tipo
+      </a>
     </div>
 
     <!-- Estado del Evento -->
@@ -85,4 +88,104 @@
   </form>
 
 </section>
+
+<!-- Modal para crear y gestionar tipos de evento -->
+<div id="tipoEventoModal" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
+  <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md space-y-4">
+    <h2 class="text-xl font-bold">Gestión de Tipos de Evento</h2>
+
+    <!-- Formulario para crear -->
+    <form id="tipoEventoForm" method="POST" onsubmit="crearTipoEvento(event)">
+      {% csrf_token %}
+      <div class="flex space-x-2">
+        <input type="text" id="nuevo_tipo_nombre" name="nombre" placeholder="Nuevo tipo..." required
+          class="w-full border px-4 py-2 rounded" />
+        <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded">Guardar</button>
+      </div>
+    </form>
+
+    <!-- Lista de tipos creados -->
+    <ul id="lista-tipos-evento" class="space-y-2 max-h-60 overflow-y-auto pr-2">
+      <!-- Se llenará por JS -->
+    </ul>
+
+    <div class="text-right">
+      <button onclick="toggleTipoEventoModal()" class="text-gray-600 hover:underline">Cerrar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  function toggleTipoEventoModal() {
+    const modal = document.getElementById("tipoEventoModal");
+    modal.classList.toggle("hidden");
+    if (!modal.classList.contains("hidden")) {
+      cargarTiposEvento();
+    }
+  }
+
+  function crearTipoEvento(event) {
+    event.preventDefault();
+    const nombre = document.getElementById("nuevo_tipo_nombre").value;
+    const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+    fetch("{% url 'tipo_evento_create' %}", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "X-CSRFToken": csrfToken
+      },
+      body: new URLSearchParams({ nombre })
+    })
+    .then(() => {
+      document.getElementById("nuevo_tipo_nombre").value = "";
+      cargarTiposEvento();
+      actualizarSelectTipos();
+      toggleTipoEventoModal(); // esto cierra el modal
+    });
+  }
+
+  function cargarTiposEvento() {
+    fetch("{% url 'api_tipo_eventos' %}")
+      .then(res => res.json())
+      .then(data => {
+        const lista = document.getElementById("lista-tipos-evento");
+        lista.innerHTML = "";
+        data.forEach(tipo => {
+          const li = document.createElement("li");
+          li.className = "flex justify-between items-center border px-3 py-2 rounded";
+          li.innerHTML = `
+            <span>${tipo.nombre}</span>
+            <button onclick="eliminarTipoEvento(${tipo.id})" class="text-red-600 hover:underline text-sm">Eliminar</button>
+          `;
+          lista.appendChild(li);
+        });
+      });
+  }
+
+  function eliminarTipoEvento(pk) {
+    fetch(`/api/tipo-eventos/delete/${pk}/`, {
+      method: "POST"
+    }).then(() => {
+      cargarTiposEvento();
+      actualizarSelectTipos();
+    });
+  }
+
+  function actualizarSelectTipos() {
+    fetch("{% url 'api_tipo_eventos' %}")
+      .then(res => res.json())
+      .then(data => {
+        const select = document.querySelector("select[name='tipo_evento']");
+        select.innerHTML = "";
+        data.forEach(tipo => {
+          const option = document.createElement("option");
+          option.value = tipo.id;
+          option.textContent = tipo.nombre;
+          select.appendChild(option);
+        });
+      });
+  }
+</script>
+
 {% endblock %}

@@ -30,6 +30,8 @@ urlpatterns = [
     path('nathySantos/', nathySantos, name='nathySantos'),
     path('portfolio/menuPortfolio/', menuPortfolio, name='menuPortfolio'),
     path('calendar/', views.reserva_calendario, name='calendar'),
+    path('api/eventos-json/', views.eventos_json, name='eventos_json'),
+    path('enviar-reserva/', views.enviar_reserva, name='enviar_reserva'),
     path('portfolio/<slug:category_slug>/', views.portfolio_dynamic_view, name= 'dynamic_portfolio'),
     path('', include('admin_NathySantos.urls')),
     path('admin-panel/', include('admin_NathySantos.urls')),
