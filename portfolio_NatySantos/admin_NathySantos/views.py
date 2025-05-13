@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Q
 from django.http import JsonResponse
 from django.conf import settings
+from calendar import month_name
 from .models import PortfolioCategory, Cliente,Evento, TipoEvento, EstadoEvento
 from .forms import PortfolioCategoryForm,ClienteForm
 import os
@@ -105,7 +106,7 @@ def manage_category_images(request, pk):
     })
 
 #Gestion de Clientes
-
+@login_required(login_url='/login/')
 def clientes_list(request):
   query = request.GET.get("q", "").strip()
 
@@ -123,7 +124,7 @@ def clientes_list(request):
   return render(request, 'clientes/lista_clientes.html', {"clientes": clientes, "query": query})
 
 #CRUD Clientes
-
+@login_required(login_url='/login/')
 def cliente_create(request):
     if request.method == "POST":
         form = ClienteForm(request.POST)
@@ -133,7 +134,7 @@ def cliente_create(request):
     else:
         form = ClienteForm()
     return render(request, "/form_cliente.html", {"form": form, "titulo": "Nuevo Cliente"})
-
+@login_required(login_url='/login/')
 def cliente_edit(request, pk):
     cliente = get_object_or_404(Cliente, pk=pk)
     if request.method == "POST":
@@ -144,7 +145,7 @@ def cliente_edit(request, pk):
     else:
         form = ClienteForm(instance=cliente)
     return render(request, "clientes/sesiones.html", {"form": form, "titulo": "Editar Cliente"})
-
+@login_required(login_url='/login/')
 def cliente_delete(request, pk):
     cliente = get_object_or_404(Cliente, pk=pk)
     if request.method == "POST":
@@ -153,7 +154,7 @@ def cliente_delete(request, pk):
     return render(request, "/eliminar_cliente.html", {"cliente": cliente})
 
 #Gestion de Sesiones
-
+@login_required(login_url='/login/')
 def crear_evento(request, cliente_id):
     cliente = get_object_or_404(Cliente, pk=cliente_id)
     tipo_eventos = TipoEvento.objects.all()
@@ -190,7 +191,7 @@ def crear_evento(request, cliente_id):
     })
 
 # Tipos de eventos
-
+@login_required(login_url='/login/')
 def tipo_evento_create(request):
     if request.method == 'POST':
         nombre = request.POST.get('nombre')
@@ -199,7 +200,7 @@ def tipo_evento_create(request):
     return redirect(request.META.get('HTTP_REFERER', 'clientes_list'))
 
 #API creasion de tipos de eventos
-
+@login_required(login_url='/login/')
 def api_tipo_eventos(request):
     tipos = TipoEvento.objects.all().values('id', 'nombre')
     return JsonResponse(list(tipos), safe=False)
@@ -212,7 +213,7 @@ def delete_tipo_evento(request, pk):
     return JsonResponse({'success': False}, status=400)
 
 # CRUD Eventos
-
+@login_required(login_url='/login/')
 def editar_evento(request, pk):
     evento = get_object_or_404(Evento, pk=pk)
     tipo_eventos = TipoEvento.objects.all()
@@ -233,10 +234,65 @@ def editar_evento(request, pk):
         'estados': estados,
     })
 
-
+@login_required(login_url='/login/')
 def eliminar_evento(request, pk):
+    
     evento = get_object_or_404(Evento, pk=pk)
     cliente_id = evento.cliente.pk
     if request.method == 'POST':
         evento.delete()
     return redirect('crear_evento', cliente_id=cliente_id)
+
+@login_required(login_url='/login/')
+def listar_eventos(request):
+    estados_eventos()
+    query = request.GET.get('q', '').strip()
+    tipo = request.GET.get('tipo', '')
+    mes = request.GET.get('mes', '')
+
+    eventos = Evento.objects.select_related('cliente', 'tipoEvento', 'estado')
+
+    if query:
+        eventos = eventos.filter(
+            Q(cliente__nombre__icontains=query) |
+            Q(cliente__ID_CC__icontains=query)
+        )
+
+    if tipo:
+        eventos = eventos.filter(tipoEvento_id=tipo)
+
+    if mes:
+        eventos = eventos.filter(fecha_evento__month=mes)
+
+    eventos = eventos.order_by('-fecha_evento')
+
+    tipos = TipoEvento.objects.all()
+
+    return render(request, 'admin_NathySantos/lista_eventos.html', {
+        'eventos': eventos,
+        'tipos': tipos,
+        'meses': meses,
+        'query': query,
+        'mes': mes,
+        'tipo': tipo,
+    })
+
+# Lista de meses
+meses = [(i, month_name[i]) for i in range(1, 13)]
+
+# Estados de los eventos
+def estados_eventos():
+    from .models import EstadoEvento
+
+    estados = [
+        "pendiente",
+        "pago_parcial",
+        "pago_completo",
+        "cancelado"
+    ]
+
+    for e in estados:
+        EstadoEvento.objects.get_or_create(estado=e)
+
+
+    

@@ -19,4 +19,5 @@ urlpatterns = [
     path('api/tipo-eventos/delete/<int:pk>/', views.delete_tipo_evento, name='delete_tipo_evento'),
     path('evento/editar/<int:pk>/', views.editar_evento, name='editar_evento'),
     path('evento/eliminar/<int:pk>/', views.eliminar_evento, name='eliminar_evento'),
+    path('admin-panel/eventos/', views.listar_eventos, name='listar_eventos'),
 ]

@@ -7,7 +7,7 @@ Panel de Categorías | Nathy Santos
 
 {% block content %}
 
-<section class="py-8 m-2 relative">
+<section class="py-8 bg-white m-2 relative rounded-lg shadow-md hover:shadow-lg transition-all duration-300">
 
   <div class="absolute top-4 right-4">
     <!-- boton para salir de ls sesion actual -->
@@ -18,18 +18,36 @@ Panel de Categorías | Nathy Santos
     </form>
   </div>
 </section>
-<section class="py-8 bg-white m-2 relative">
+
+<!--Botón Gestionar Clientes-->
+
+<section class="py-8 bg-white m-2 relative rounded-lg shadow-md hover:shadow-lg transition-all duration-300">
+
 
   <div class="container mx-auto px-8">
     <h2 class="text-3xl font-bold mb-8">Gestion de clientes</h2>
 
     <a href="{% url 'clientes_list' %}"
       class="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded transition ml-2">
-      Gestión de Clientes
+      Gestionar Clientes
     </a>
 </section>
 
-<section class="py-8 bg-white">
+<!--Botón Gestionar sesiones-->
+
+<section class="py-8 bg-white m-2 relative rounded-lg shadow-md hover:shadow-lg transition-all duration-300">
+
+
+  <div class="container mx-auto px-8">
+    <h2 class="text-3xl font-bold mb-8">Gestionar Sesiones</h2>
+
+    <a href="{% url 'listar_eventos' %}"
+      class="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded transition ml-2">
+      Gestionar Sesiones
+    </a>
+</section>
+
+<section class="py-8 bg-white m-2 relative rounded-lg shadow-md hover:shadow-lg transition-all duration-300">
   <div class="container mx-auto px-8">
     <h2 class="text-3xl font-bold mb-8">Categorías de Portafolio</h2>
 

@@ -155,4 +155,7 @@ def portfolio_dynamic_view(request, category_slug):
     'category_slug': category.slug
     })
     
+# Calendario Dinámico
 
+def reserva_calendario(request):
+    return render(request, 'clientes/calendario.html')

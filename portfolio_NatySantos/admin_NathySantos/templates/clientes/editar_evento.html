@@ -2,9 +2,22 @@
 {% block content %}
 <section class="p-8 max-w-xl mx-auto bg-white shadow-md rounded-lg relative">
 
-  <a href="{% url 'crear_evento' evento.cliente.pk %}" 
-     class="absolute top-4 right-4 bg-gray-200 hover:bg-gray-300 text-gray-700 text-sm font-medium py-2 px-4 rounded shadow">
-    &#8592; Regresar
+  <!-- Botón de regreso -->
+  <a href="{% url 'clientes_list' %}"
+    class="absolute top-4 right-12 bg-gray-200 hover:bg-gray-300 text-gray-700 text-sm font-medium py-2 px-4 rounded shadow">
+    &#8592; Clientes
+  </a>
+
+  <!-- botón para ir al dasboard-->
+  <a href="{% url 'dashboard' %}"
+    class="absolute top-4 right-44 bg-gray-200 hover:bg-gray-300 text-gray-700 text-sm font-medium py-2 px-4 rounded flex items-center shadow">
+    &#8592; Principal
+  </a>
+
+    <!-- Botón de regreso -->
+  <a href="{% url 'listar_eventos' %}"
+    class="absolute top-4 right-80 bg-gray-200 hover:bg-gray-300 text-gray-700 text-sm font-medium py-2 px-4 rounded shadow">
+    &#8592; Sesiones
   </a>
 
   <h2 class="text-2xl font-bold mt-12 text-center">Editar Sesión para {{ evento.cliente.nombre }}</h2>
