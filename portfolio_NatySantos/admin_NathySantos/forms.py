@@ -15,6 +15,4 @@ class ClienteForm(forms.ModelForm):
         model = Cliente
         fields = ['nombre', 'ID_CC', 'telefono', 'email']
 
-# Gestion de Sesiones
-
 

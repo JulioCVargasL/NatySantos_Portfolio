@@ -66,7 +66,7 @@ def rename_portfolio_assets_if_slug_changed(sender, instance, **kwargs):
 
         if os.path.exists(old_images_dir):
             os.rename(old_images_dir, new_images_dir)
-            print(f"📂 Carpeta renombrada: {old_slug} -> {new_slug}")
+            print(f" Carpeta renombrada: {old_slug} -> {new_slug}")
 
         # Renombrar HTML
         template_dir = os.path.join(settings.BASE_DIR, 'templates', 'portfolio')
@@ -75,4 +75,4 @@ def rename_portfolio_assets_if_slug_changed(sender, instance, **kwargs):
 
         if os.path.exists(old_template_path):
             os.rename(old_template_path, new_template_path)
-            print(f"📝 HTML renombrado: {old_slug}.html -> {new_slug}.html")
+            print(f" HTML renombrado: {old_slug}.html -> {new_slug}.html")

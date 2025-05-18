@@ -125,6 +125,7 @@ def clientes_list(request):
   return render(request, 'clientes/lista_clientes.html', {"clientes": clientes, "query": query})
 
 #CRUD Clientes
+
 @login_required(login_url='/login/')
 def cliente_create(request):
     if request.method == "POST":
@@ -148,6 +149,7 @@ def cliente_edit(request, pk):
     else:
         form = ClienteForm(instance=cliente)
     return render(request, "clientes/sesiones.html", {"form": form, "titulo": "Editar Cliente"})
+
 @login_required(login_url='/login/')
 def cliente_delete(request, pk):
     cliente = get_object_or_404(Cliente, pk=pk)
@@ -157,6 +159,7 @@ def cliente_delete(request, pk):
     return render(request, "/eliminar_cliente.html", {"cliente": cliente})
 
 #Gestion de Sesiones
+
 @login_required(login_url='/login/')
 def crear_evento(request, cliente_id):
     cliente = get_object_or_404(Cliente, pk=cliente_id)
@@ -202,7 +205,7 @@ def tipo_evento_create(request):
             TipoEvento.objects.create(nombre=nombre)
     return redirect(request.META.get('HTTP_REFERER', 'clientes_list'))
 
-#API creasion de tipos de eventos
+#API creacion de tipos de eventos
 @login_required(login_url='/login/')
 def api_tipo_eventos(request):
     tipos = TipoEvento.objects.all().values('id', 'nombre')
@@ -216,6 +219,7 @@ def delete_tipo_evento(request, pk):
     return JsonResponse({'success': False}, status=400)
 
 # CRUD Eventos
+
 @login_required(login_url='/login/')
 def editar_evento(request, pk):
     evento = get_object_or_404(Evento, pk=pk)

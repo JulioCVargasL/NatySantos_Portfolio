@@ -129,6 +129,8 @@
     const nombre = document.getElementById("nuevo_tipo_nombre").value;
     const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 
+    {% comment %} Sincronizacion tipo AJAX, para crear tipos de eventos {% endcomment %}
+
     fetch("{% url 'tipo_evento_create' %}", {
       method: "POST",
       headers: {

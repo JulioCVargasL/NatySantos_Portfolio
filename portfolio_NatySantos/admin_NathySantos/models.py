@@ -39,6 +39,15 @@ class photo(models.Model):
   
 # Gestion de clientes y sesiones fotograficas
 
+class Cliente(models.Model):
+    nombre = models.CharField(max_length=100)
+    ID_CC = models.CharField(max_length=20, unique=True)
+    telefono = models.CharField(max_length=20)
+    email = models.EmailField()
+
+    def __str__(self):
+        return self.nombre
+    
 class TipoEvento(models.Model):
     nombre = models.CharField(max_length=100)
 
@@ -50,15 +59,6 @@ class EstadoEvento(models.Model):
 
     def __str__(self):
         return self.estado
-
-class Cliente(models.Model):
-    nombre = models.CharField(max_length=100)
-    ID_CC = models.CharField(max_length=20, unique=True)
-    telefono = models.CharField(max_length=20)
-    email = models.EmailField()
-
-    def __str__(self):
-        return self.nombre
 
 class Evento(models.Model):
     tipoEvento = models.ForeignKey(TipoEvento, on_delete=models.CASCADE)
